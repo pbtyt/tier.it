@@ -22,7 +22,7 @@ const CreateCardButton = () => {
 				onClick={() =>
 					createCard({
 						title: title,
-						episodesNumber: 23,
+						episodesNumber: 0,
 						status: cardStatus,
 						type: cardType,
 						criteria: criteria,

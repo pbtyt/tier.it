@@ -17,7 +17,7 @@ export function useCard<F extends string = ''>({
 	});
 
 	const [card, setCard] = useState<PickFields<ICardResponse, F> | undefined>(
-		data?.data as PickFields<ICardResponse, F> | undefined
+		data?.data as PickFields<ICardResponse, F> | undefined,
 	);
 
 	useEffect(() => {

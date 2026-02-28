@@ -3,8 +3,10 @@ import { EpisodeFormStateType } from '../model/types';
 import { episodesService } from '../service/episode.service';
 
 export function useCreateCardEpisode({
+	cardId,
 	onSuccess,
 }: {
+	cardId: string;
 	onSuccess?: () => void;
 }) {
 	const queryClient = useQueryClient();
@@ -21,6 +23,9 @@ export function useCreateCardEpisode({
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['episodes'],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ['card', cardId],
 			});
 
 			onSuccess?.();

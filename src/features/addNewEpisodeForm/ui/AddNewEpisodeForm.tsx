@@ -21,6 +21,7 @@ export function AddNewEpisodeForm({ cardId }: { cardId: string }) {
 	};
 
 	const { createCardEpisode } = useCreateCardEpisode({
+		cardId: cardId,
 		onSuccess() {
 			reset();
 		},

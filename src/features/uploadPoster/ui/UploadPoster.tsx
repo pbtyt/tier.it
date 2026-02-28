@@ -40,7 +40,7 @@ export function UploadPoster({
 					<UploadPosterModal
 						preview={reader.result as string}
 						onClose={() => reset()}
-					/>
+					/>,
 				);
 			};
 		}

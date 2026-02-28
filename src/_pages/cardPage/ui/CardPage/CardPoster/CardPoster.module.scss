@@ -1,0 +1,14 @@
+.noPoster {
+	min-width: var(--at-ui-card-poster-width);
+	height: auto;
+	aspect-ratio: 3 / 4;
+}
+
+.poster {
+	min-width: var(--at-ui-card-poster-width);
+	img {
+		border-radius: 8px;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+	}
+}
