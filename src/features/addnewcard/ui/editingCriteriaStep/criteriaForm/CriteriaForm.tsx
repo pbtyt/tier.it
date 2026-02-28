@@ -1,10 +1,10 @@
 'use client';
 
 import { Input } from '@/shared/ui/Input';
-import { Plus } from 'lucide-react';
 import { useCallback, useState } from 'react';
-import { useEditingCriteriaContext } from '../editingCriteriaContext/EditingCriteriaContext';
+import { useEditingCriteriaContext } from '../../../model/contexts/EditingCriteriaContext';
 
+import { Plus } from 'lucide-react';
 import styles from './CriteriaForm.module.scss';
 
 export interface CriteriaFormProps {
@@ -16,21 +16,26 @@ export const CriteriaForm = ({ disabled }: CriteriaFormProps) => {
 	const [criteriaTitle, setCriteriaTitle] = useState('');
 	const [criteriaWeight, setCriteriaWeight] = useState('0');
 
-	const handleAddButtonClick = useCallback(() => {
-		const newCriterion = {
-			id: String(Date.now()), //TODO: FIX
-			title: criteriaTitle,
-			weight: parseInt(criteriaWeight),
-		};
+	const handleCriteriaAdd = useCallback(
+		(e: React.FormEvent) => {
+			e.preventDefault();
 
-		setCriteria(prev => [newCriterion, ...prev]);
+			const newCriterion = {
+				id: String(Date.now()), //TODO: FIX
+				title: criteriaTitle,
+				weight: parseInt(criteriaWeight),
+			};
 
-		setCriteriaTitle('');
-		setCriteriaWeight('');
-	}, [criteriaTitle, criteriaWeight, setCriteria]);
+			setCriteria(prev => [newCriterion, ...prev]);
+
+			setCriteriaTitle('');
+			setCriteriaWeight('');
+		},
+		[criteriaTitle, criteriaWeight, setCriteria],
+	);
 
 	return (
-		<div className={styles.criteriaForm}>
+		<form onSubmit={handleCriteriaAdd} className={styles.criteriaForm}>
 			<Input
 				placeholder='Название критерия'
 				className={styles.criteriaTitle}
@@ -49,12 +54,26 @@ export const CriteriaForm = ({ disabled }: CriteriaFormProps) => {
 			/>
 
 			<button
+				type='submit'
 				className={styles.addButton}
-				onClick={handleAddButtonClick}
+				onClick={handleCriteriaAdd}
 				aria-label='Добавить критерий'
 			>
 				<Plus size={36} />
 			</button>
-		</div>
+		</form>
 	);
 };
+
+// <div className={styles.criteriaForm}>
+
+{
+	/* <button
+	className={styles.addButton}
+	onClick={handleAddButtonClick}
+	aria-label='Добавить критерий'
+>
+	<Plus size={36} />
+</button>; */
+}
+// </div>

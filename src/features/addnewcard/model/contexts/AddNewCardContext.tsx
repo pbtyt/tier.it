@@ -40,7 +40,7 @@ export const AddNewCardProvider = ({
 			cardType,
 			setCardType,
 		}),
-		[title, cardStatus, cardType]
+		[title, cardStatus, cardType],
 	);
 
 	return (

@@ -6,6 +6,7 @@ interface ICriteriaProps {
 	weight: number;
 }
 
+//TODO: MB REMOVE?
 export function Criteria({ title, weight }: ICriteriaProps) {
 	return (
 		<div className={styles.wrapper}>

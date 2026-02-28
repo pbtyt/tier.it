@@ -1,15 +1,15 @@
 import { useCreateCard } from '@/entities/card/hooks/useCreateCard';
 import { Button } from '@/shared/ui/Button';
-import styles from '../AddNewCard.module.scss';
-import { useAddNewCardContext } from '../addNewCardContext/AddNewCardContext';
-import { CriteriaForm } from './criteriaForm/CriteriaForm';
-import { CriteriaList } from './criteriaList/CriteriaList';
+import { useAddNewCardContext } from '../../model/contexts/AddNewCardContext';
 import {
 	EditingCriteriaProvider,
 	useEditingCriteriaContext,
-} from './editingCriteriaContext/EditingCriteriaContext';
+} from '../../model/contexts/EditingCriteriaContext';
+import { CriteriaForm } from './criteriaForm/CriteriaForm';
+import { CriteriaList } from './criteriaList/CriteriaList';
+import styles from './EditingCriteriaStep.module.scss';
 
-const AddNewCard = () => {
+const CreateCardButton = () => {
 	const { title, cardStatus, cardType } = useAddNewCardContext();
 	const { criteria } = useEditingCriteriaContext();
 	const { createCard } = useCreateCard();
@@ -48,7 +48,7 @@ export const EditingCriteriaStep = () => {
 				<EditingCriteriaStep.CriteriaList />
 			</section>
 
-			<AddNewCard />
+			<CreateCardButton />
 		</EditingCriteriaProvider>
 	);
 };

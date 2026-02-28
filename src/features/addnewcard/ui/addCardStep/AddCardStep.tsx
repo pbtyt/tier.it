@@ -5,8 +5,8 @@ import { Button } from '@/shared/ui/Button';
 import { DropDown } from '@/shared/ui/DropDown';
 import { Input } from '@/shared/ui/Input';
 import { Dispatch, memo, SetStateAction, useCallback } from 'react';
-import styles from '../AddNewCard.module.scss';
-import { useAddNewCardContext } from '../addNewCardContext/AddNewCardContext';
+import { useAddNewCardContext } from '../../model/contexts/AddNewCardContext';
+import styles from './AddCardStep.module.scss';
 
 interface IAddCardStep {
 	setNewStep: Dispatch<SetStateAction<number>>;
@@ -26,7 +26,7 @@ export const AddCardStep = memo(function AddCardStep({
 	const onStatusSelect = (
 		ddId: string,
 		preview: string,
-		data: CardStatusType
+		data: CardStatusType,
 	) => {
 		setCardStatus(data);
 

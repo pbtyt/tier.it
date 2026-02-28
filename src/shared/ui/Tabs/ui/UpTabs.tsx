@@ -33,7 +33,7 @@ const TabsProvider = ({ children }: { children: React.ReactNode }) => {
 	const [currentActiveTabIndex, setCurrentActiveTabIndex] = useState(0);
 	const value = useMemo(
 		() => ({ currentActiveTabIndex, setCurrentActiveTabIndex }),
-		[currentActiveTabIndex]
+		[currentActiveTabIndex],
 	);
 
 	return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;

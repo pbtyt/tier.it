@@ -1,75 +1,52 @@
-import { useCardStore } from '@/entities/card';
-import { Button } from '@/shared/ui/Button';
+import { type CriteriaType } from '@/entities/criteria';
 import { Trash } from 'lucide-react';
-import { useCallback, useEffect } from 'react';
-import { useAddNewCardContext } from '../../addNewCardContext/AddNewCardContext';
-import { useEditingCriteriaContext } from '../editingCriteriaContext/EditingCriteriaContext';
+import { useEditingCriteriaContext } from '../../../model/contexts/EditingCriteriaContext';
 import styles from './CriteriaList.module.scss';
 
-//SOLID ???
-//TODO: Remove Button from this component
-export function CriteriaList() {
-	const { title } = useAddNewCardContext();
+interface ICriteriaProps {
+	criteria: CriteriaType;
+}
 
-	const { addCard, removeAll } = useCardStore();
+function Criteria({ criteria }: ICriteriaProps) {
+	return (
+		<div className={styles.wrapper}>
+			<span>{criteria.title}</span>
 
-	const { criteria, setCriteria } = useEditingCriteriaContext();
-
-	const isSaveDisable = criteria.length === 0;
-
-	const handleDeleteClick = useCallback(
-		(id: number) => {
-			setCriteria(criteria.filter(c => c.id !== id));
-		},
-		[criteria]
+			<div className={styles.weightWrapper}>
+				<span>{criteria.weight}</span>
+			</div>
+		</div>
 	);
+}
 
-	const handleSaveClick = useCallback(() => {
-		if (isSaveDisable) return;
+function CriteriaWithDeleteAction({ criteria }: ICriteriaProps) {
+	return (
+		<li className={styles.criteria} key={criteria.id}>
+			<Criteria criteria={criteria} />
+			<button
+				className={styles.trashButton}
+				// onClick={() => handleDeleteClick(criteria.id)}
+			>
+				<Trash size={16} strokeWidth={2} />
+				<span>Удалить</span>
+			</button>
+		</li>
+	);
+}
 
-		addCard({ criteria: criteria, title: title, posterUrl: '' });
-
-		// DEBUG ONLY
-		// removeAll();
-	}, [criteria]);
-
-	useEffect(() => {
-		console.log(criteria);
-	}, [criteria]);
+//SOLID ???
+export function CriteriaList() {
+	const { criteria, setCriteria } = useEditingCriteriaContext();
 
 	return (
 		<>
 			{criteria.length > 0 && (
 				<ul className={styles.container}>
 					{criteria.map(c => (
-						<li className={styles.criteria} key={c.id}>
-							<div className={styles.wrapper}>
-								<span>{c.title}</span>
-
-								<div className={styles.weightWrapper}>
-									<span>{c.weight}</span>
-								</div>
-							</div>
-
-							<button
-								className={styles.trashButton}
-								onClick={() => handleDeleteClick(c.id)}
-							>
-								<Trash size={16} strokeWidth={2} />
-								<span>Удалить</span>
-							</button>
-						</li>
+						<CriteriaWithDeleteAction criteria={c} key={c.id} />
 					))}
 				</ul>
 			)}
-
-			<Button
-				buttonText='Сохранить'
-				buttonColor='primary'
-				className={styles.button}
-				onClick={handleSaveClick}
-				disabled={isSaveDisable}
-			/>
 		</>
 	);
 }

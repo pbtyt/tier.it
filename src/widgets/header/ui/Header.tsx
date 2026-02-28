@@ -1,3 +1,5 @@
+import { SITE_ROUTES_BASE } from '@/shared/config/page-url.config';
+import { SITE_NAME } from '@/shared/constants/seo.constants';
 import { House } from 'lucide-react';
 import Link from 'next/link';
 import styles from './Header.module.scss';
@@ -8,12 +10,12 @@ export function Header() {
 		<header className={styles.header}>
 			<div className={styles.logo}>
 				{/* TODO: Need Logo */}
-				<h3>Anitier</h3>
+				<h3>{SITE_NAME}</h3>
 			</div>
 			<nav className={styles.menu}>
 				<ul className={styles.menuItems}>
 					<li>
-						<Link href={''} className={styles.menuItem}>
+						<Link href={SITE_ROUTES_BASE.CHOOSE} className={styles.menuItem}>
 							<div className={styles.iconWrapper}>
 								<House className={styles.icon} />
 							</div>
@@ -21,7 +23,7 @@ export function Header() {
 						</Link>
 					</li>
 					<li>
-						<Link href={''} className={styles.menuItem}>
+						<Link href={SITE_ROUTES_BASE.CHOOSE} className={styles.menuItem}>
 							<div className={styles.iconWrapper}>
 								<House className={styles.icon} />
 							</div>
@@ -29,7 +31,7 @@ export function Header() {
 						</Link>
 					</li>
 					<li>
-						<Link href={''} className={styles.menuItem}>
+						<Link href={SITE_ROUTES_BASE.CHOOSE} className={styles.menuItem}>
 							<div className={styles.iconWrapper}>
 								<House className={styles.icon} />
 							</div>

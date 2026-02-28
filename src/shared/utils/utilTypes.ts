@@ -31,12 +31,12 @@ export type SplitFieldsString<T, F extends string> =
 	F extends ''
 		? keyof T
 		: // Рекурсивно разбираем строку по запятым
-		F extends `${infer First},${infer Rest}`
-		? Extract<First, keyof T> | SplitFieldsString<T, Rest> // Извлекаем валидные ключи
-		: // Обрабатываем последний элемент в строке
-		F extends keyof T
-		? F
-		: never; // Игнорируем невалидные поля
+			F extends `${infer First},${infer Rest}`
+			? Extract<First, keyof T> | SplitFieldsString<T, Rest> // Извлекаем валидные ключи
+			: // Обрабатываем последний элемент в строке
+				F extends keyof T
+				? F
+				: never; // Игнорируем невалидные поля
 
 /**
  * Утилита для выборки указанных полей из типа по строковому списку.

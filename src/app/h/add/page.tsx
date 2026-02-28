@@ -1,4 +1,4 @@
-import { AddNewCard } from '@/features/addnewcard';
+import { NewCardCreatorPage } from '@/_pages/addNewCard';
 import { NO_INDEX_PAGE } from '@/shared/constants/seo.constants';
 import type { Metadata } from 'next';
 
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function AddPage() {
-	return <AddNewCard />;
+	return <NewCardCreatorPage />;
 }

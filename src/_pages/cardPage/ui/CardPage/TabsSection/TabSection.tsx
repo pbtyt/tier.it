@@ -7,11 +7,11 @@ import styles from './TabSection.module.scss';
 export function TabSection({ cardId }: { cardId: string }) {
 	return (
 		<UpTabs className={styles.tabWrapper}>
-			<UpTabs.TabsHeader>
+			<UpTabs.Header>
 				<UpTabs.Tab title='Эпизоды' />
 				<UpTabs.Tab title='Редактирование критериев' />
 				<UpTabs.Tab title='Оценка' />
-			</UpTabs.TabsHeader>
+			</UpTabs.Header>
 
 			<UpTabs.Content viewIndex={0}>
 				<EpisodeTab cardId={cardId} />
