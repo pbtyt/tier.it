@@ -1,0 +1,65 @@
+.wrapper {
+	padding: 12px;
+
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+	grid-column-gap: 1.5rem;
+	grid-row-gap: 1.5rem;
+
+	.section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+
+		.header h4 {
+			font-weight: 500;
+		}
+	}
+
+	.sectionBlock {
+		padding: 1rem;
+
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+
+		background: var(--at-color-black-400);
+
+		border-radius: 8px;
+	}
+
+	.primaryInfoWrapper {
+		grid-area: 1 / 1 / 4 / 4;
+
+		.textbox {
+			padding: 12px;
+			width: 100%;
+			height: 130px;
+			resize: none;
+			background: var(--at-color-gray-950);
+			color: var(--at-color-white-500);
+			caret-color: var(--at-color-white-500);
+			border-radius: 8px;
+			border: none;
+		}
+	}
+
+	.secondaryInfoWrapper {
+		grid-area: 1 / 4 / 6 / 6;
+		align-self: start;
+	}
+
+	.posterWrapper {
+		grid-area: 4 / 1 / 6 / 4;
+
+		display: flex;
+		align-items: flex-start;
+		gap: 2rem;
+
+		.uploadPoster {
+			width: 200px;
+			height: 200px;
+		}
+	}
+}

@@ -1,12 +1,16 @@
 import { axiosWithAuth } from '@/shared/interceptors';
-import { CardFormStateType, ICardResponse } from '../model/types';
+import {
+	CardFormStateType,
+	ICardResponse,
+	IPosterUploadResponse,
+} from '../model/types';
 
 class CardService {
 	private BASE_ROOT = '/card';
 
 	async getCardById(id: string, fields?: string) {
 		const response = await axiosWithAuth.get<ICardResponse>(
-			`${this.BASE_ROOT}/${id}?fields=${fields}`
+			`${this.BASE_ROOT}/${id}?fields=${fields}`,
 		);
 
 		return response;
@@ -14,7 +18,7 @@ class CardService {
 
 	async getCards(fields?: string) {
 		const response = await axiosWithAuth.get<ICardResponse[]>(
-			`${this.BASE_ROOT}?fields=${fields}`
+			`${this.BASE_ROOT}?fields=${fields}`,
 		);
 
 		return response;
@@ -23,7 +27,7 @@ class CardService {
 	async createCard(data: CardFormStateType) {
 		const response = await axiosWithAuth.post<ICardResponse>(
 			this.BASE_ROOT,
-			data
+			data,
 		);
 		return response;
 	}
@@ -31,16 +35,30 @@ class CardService {
 	async updateCard(id: string, data: CardFormStateType) {
 		const response = await axiosWithAuth.put<ICardResponse>(
 			`${this.BASE_ROOT}/${id}`,
-			data
+			data,
 		);
 		return response;
 	}
 
 	async deleteCard(id: string) {
 		const response = await axiosWithAuth.delete<ICardResponse>(
-			`${this.BASE_ROOT}/${id}`
+			`${this.BASE_ROOT}/${id}`,
 		);
 		return response;
+	}
+
+	async uploadPoster(id: string, data: FormData) {
+		const posterURL = `/card/${id}/poster`;
+
+		const response = await axiosWithAuth.post<IPosterUploadResponse>(
+			posterURL,
+			data,
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			},
+		);
 	}
 }
 

@@ -27,6 +27,12 @@ export interface ICardResponse {
 	episodes?: IEpisodeResponse[];
 }
 
+export type IPosterUploadResponse = {
+	id: number;
+	filename: string;
+	path: string;
+};
+
 export const Type = {
 	TV: 'TV',
 	FILM: 'FILM',

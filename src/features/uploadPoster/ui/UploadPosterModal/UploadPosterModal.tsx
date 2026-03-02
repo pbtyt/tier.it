@@ -26,7 +26,7 @@ export function UploadPosterModal({
 
 	const handleOnConfirm = () => {
 		onConfirm?.();
-		// hideModal();
+		hideModal();
 	};
 
 	return (

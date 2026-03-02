@@ -3,7 +3,7 @@ import { type CriteriaType } from '@/entities/criteria';
 
 export const calculateInterest = (
 	criteriaRating: EpisodeRatingType[],
-	criteria: CriteriaType[]
+	criteria: CriteriaType[],
 ) => {
 	const totalWeight = criteria.reduce((acc, c) => acc + c.weight, 0);
 
