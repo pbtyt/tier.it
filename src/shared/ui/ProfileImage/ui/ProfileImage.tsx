@@ -16,7 +16,7 @@ export function ProfileImage({
 	className,
 }: ProfileImageProps) {
 	const { ref: parentRef, openPopover } = usePopover<HTMLDivElement>(
-		<ProfilePopover />
+		<ProfilePopover />,
 	);
 
 	return (
@@ -27,7 +27,7 @@ export function ProfileImage({
 			className={clsx(styles.coverWrapper, { [styles.border]: border })}
 		>
 			<img
-				src={`/placeholders/poster_placeholder.jpg`}
+				src={process.env.NEXT_PUBLIC_PLACEHOLDER}
 				alt='Profile Image'
 				className={clsx(styles.cover, className)}
 			/>

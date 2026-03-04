@@ -1,0 +1,46 @@
+@use '@styles/helpers' as h;
+
+.wrapper {
+	position: relative;
+
+	.trashButton,
+	.editButton {
+		visibility: collapse;
+		opacity: 0;
+
+		transition: opacity 350ms ease-out;
+
+		position: absolute;
+		top: 1rem;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		padding: 0.45rem;
+
+		border-radius: 15px;
+	}
+
+	.trashButton {
+		right: 1rem;
+
+		color: var(--at-color-red);
+		background: h.hex-w-alpha(var(--at-color-red), 0.5);
+	}
+
+	.editButton {
+		right: calc(2.5rem + 30px);
+
+		color: var(--at-color-gray-100);
+		background: var(--at-color-black-100);
+	}
+
+	&:hover .trashButton,
+	&:hover .editButton {
+		visibility: visible;
+		opacity: 1;
+
+		transition: opacity 350ms ease-in;
+	}
+}

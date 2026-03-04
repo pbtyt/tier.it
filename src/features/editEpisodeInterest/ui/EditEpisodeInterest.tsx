@@ -19,7 +19,7 @@ export function EditEpisodeInterest({
 	const { showModal } = useModal();
 	const handleEpisodeClick = useCallback(() => {
 		showModal(
-			<EpisodeModal id={episodeId} episodeRatingData={episodeRatingData} />
+			<EpisodeModal id={episodeId} episodeRatingData={episodeRatingData} />,
 		);
 	}, [episodeRatingData]);
 
