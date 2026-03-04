@@ -32,6 +32,10 @@
 	.primaryInfoWrapper {
 		grid-area: 1 / 1 / 4 / 4;
 
+		// .input:required:invalid {
+		// 	border: 1px solid var(--at-color-red);
+		// }
+
 		.textbox {
 			padding: 12px;
 			width: 100%;

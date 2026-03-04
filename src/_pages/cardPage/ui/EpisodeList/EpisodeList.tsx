@@ -18,6 +18,7 @@ export function EpisodeList({ cardId }: IEpisodeListProps) {
 					<EpisodeWithActions
 						title={e.title}
 						number={e.number}
+						totalEpisodeRating={e.totalEpisodeRating}
 						progress={(e.totalEpisodeRating / 5) * 100}
 						id={e.id}
 						episodeRatingData={e.episodeRating}

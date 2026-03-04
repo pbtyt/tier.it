@@ -1,3 +1,13 @@
+.poster {
+	min-width: 150px;
+	img {
+		border-radius: 8px;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+		object-position: center;
+	}
+}
+
 .posterLoaderWrapper {
 	display: flex;
 	flex-direction: column;

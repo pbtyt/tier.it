@@ -106,7 +106,6 @@ export function UploadPoster({
 			const reader = new FileReader();
 			reader.readAsDataURL(watchFileSelected);
 			reader.onload = () => {
-				// setPreview(reader.result as string);
 				showModal(
 					<UploadPosterModal
 						preview={reader.result as string}
@@ -116,6 +115,10 @@ export function UploadPoster({
 				);
 			};
 		}
+
+		return () => {
+			URL.revokeObjectURL(preview);
+		};
 	}, [watchFileSelected]);
 
 	return preview ? (

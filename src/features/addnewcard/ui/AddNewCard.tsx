@@ -1,54 +1,23 @@
 'use client';
 
 import { CardStatusType, CardTypeType } from '@/entities/card';
-import { useCreateCard } from '@/entities/card/hooks/useCreateCard';
 import { UploadPoster } from '@/features/uploadPoster';
 import { Button } from '@/shared/ui/Button';
 import { DropDown } from '@/shared/ui/DropDown';
 import { Input } from '@/shared/ui/Input';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useAddNewCard } from '../hooks/useAddNewCard';
 import styles from './AddNewCard.module.scss';
 
 export function AddNewCard() {
-	const [title, setTitle] = useState<string>('test_Title');
-	const [desc, setDesc] = useState<string>('');
-	const [cardStatus, setCardStatus] = useState<CardStatusType>('ONGOING');
-	const [cardType, setCardType] = useState<CardTypeType>('TV');
-	const [posterFile, setPosterFile] = useState<File | null>(null);
-
-	const { createCard, createCardWithPoster } = useCreateCard();
-
-	useEffect(() => {
-		console.log(posterFile);
-	}, [posterFile]);
-
-	const handleOnSave = () => {
-		console.log(posterFile);
-
-		if (!posterFile) {
-			console.log('default CreateCard');
-
-			createCard({
-				title: title,
-				episodesNumber: 0,
-				status: cardStatus,
-				type: cardType,
-				criteria: [],
-			});
-			return;
-		}
-
-		console.log('with poster CreateCard');
-		createCardWithPoster({
-			title: title,
-			episodesNumber: 0,
-			status: cardStatus,
-			type: cardType,
-			criteria: [],
-			file: posterFile,
-		});
-	};
+	const {
+		values,
+		handleChange,
+		handleSetPoster,
+		onTypeSelect,
+		onStatusSelect,
+		handleOnSave,
+	} = useAddNewCard();
 
 	return (
 		<div className={styles.wrapper}>
@@ -57,7 +26,12 @@ export function AddNewCard() {
 					<div className={styles.header}>
 						<h4>Название</h4>
 					</div>
-					<Input />
+					<Input
+						name='title'
+						required
+						value={values.title}
+						onChange={handleChange}
+					/>
 				</div>
 
 				<div className={styles.section}>
@@ -93,7 +67,7 @@ export function AddNewCard() {
 						<DropDown<CardTypeType>
 							initialPreview='TV'
 							initialData={'TV'}
-							// onSelect={onTypeSelect}
+							onSelect={onTypeSelect}
 							menuTopOffset={5}
 						>
 							<DropDown.Item<CardTypeType>
@@ -121,7 +95,7 @@ export function AddNewCard() {
 						<DropDown<CardStatusType>
 							initialPreview='Онгоинг'
 							initialData={'ONGOING'}
-							// onSelect={onStatusSelect}
+							onSelect={onStatusSelect}
 							menuTopOffset={5}
 						>
 							<DropDown.Item<CardStatusType>
@@ -165,25 +139,13 @@ export function AddNewCard() {
 			</section>
 
 			<section className={styles.posterWrapper}>
-				{/* <div className={styles.sectionBlock}>
-					<div className={styles.section}>
-						<div className={styles.header}>
-							<h4>Обложка</h4>
-						</div>
-						<UploadPoster
-							entityData={{ entity: 'card', entityId: '' }}
-							className={styles.uploadPoster}
-						/>
-					</div>
-				</div> */}
-
 				<div className={styles.sectionBlock}>
 					<div className={styles.section}>
 						<div className={styles.header}>
 							<h4>Постер</h4>
 						</div>
 						<UploadPoster
-							setFile={setPosterFile}
+							setFile={handleSetPoster}
 							className={styles.uploadPoster}
 						/>
 					</div>

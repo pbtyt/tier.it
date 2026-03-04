@@ -7,6 +7,7 @@ import { Star } from 'lucide-react';
 import { CardPoster } from '../CardPoster/CardPoster';
 import { CriteriaTab } from '../CriteriaTab/CriteriaTab';
 import { EpisodeTab } from '../EpisodeTab/EpisodeTab';
+import { FranchiseTab } from '../FranchiseTab/FranchiseTab';
 import { InfoTab } from '../InfoTab/InfoTab';
 import styles from './CardInfoSection.module.scss';
 
@@ -45,6 +46,7 @@ export function CardInfoSection({ cardId }: { cardId: string }) {
 					<UpTabs.Tab title='О тайтле' />
 					<UpTabs.Tab title='Эпизоды' />
 					<UpTabs.Tab title='Критерии' />
+					<UpTabs.Tab title='Связанное' />
 				</UpTabs.Header>
 
 				<UpTabs.Content viewIndex={0}>
@@ -55,6 +57,9 @@ export function CardInfoSection({ cardId }: { cardId: string }) {
 				</UpTabs.Content>
 				<UpTabs.Content viewIndex={2}>
 					<CriteriaTab cardId={cardId} />
+				</UpTabs.Content>
+				<UpTabs.Content viewIndex={3}>
+					<FranchiseTab />
 				</UpTabs.Content>
 			</UpTabs>
 		</>

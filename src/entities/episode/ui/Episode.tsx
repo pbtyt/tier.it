@@ -1,12 +1,16 @@
+import { getEpisodeTagByRating } from '@/shared/utils/getEpisodeTagByRating';
 import styles from './Episode.module.scss';
 
 interface IEpisodeProps {
 	number: number;
 	title: string;
+	rating: number;
 	progress: number;
 }
 
-export function Episode({ number, title, progress }: IEpisodeProps) {
+export function Episode({ number, title, rating, progress }: IEpisodeProps) {
+	const tag = getEpisodeTagByRating(rating);
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.episode}>
@@ -22,7 +26,11 @@ export function Episode({ number, title, progress }: IEpisodeProps) {
 						style={{ width: `${progress}%` }}
 					></div>
 				</div>
-				<span className={styles.tips}>tips</span>
+				{tag && (
+					<div className={styles.tag} style={{ background: tag.color }}>
+						<div className={styles.tagTitle}>{tag.title}</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

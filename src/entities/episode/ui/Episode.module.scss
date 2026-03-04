@@ -1,9 +1,31 @@
 @use '@styles/helpers.scss' as h;
 
 .wrapper {
+	position: relative;
+
 	width: 100%;
 	display: flex;
 	gap: 10px;
+
+	.tag {
+		margin-top: auto;
+		align-self: flex-start;
+		background: #ffbf0f;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		padding: 4px;
+
+		border-radius: 6px;
+
+		.tagTitle {
+			color: var(--at-color-gray-950);
+			font-size: 12px;
+			font-weight: bolder;
+		}
+	}
 
 	.episode {
 		border-radius: 8px;
