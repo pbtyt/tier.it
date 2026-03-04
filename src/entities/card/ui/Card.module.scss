@@ -47,6 +47,15 @@
 			left: 1rem;
 
 			background: var(--badge-bg-c);
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.tier {
+				font-size: calc(var(--at-ui-text-fs-standard-desktop) * 1.2);
+				font-weight: 500;
+			}
 		}
 
 		.cardPoster {

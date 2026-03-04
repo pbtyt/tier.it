@@ -4,17 +4,21 @@ import { SITE_ROUTES_BASE } from '@/shared/config/page-url.config';
 import { useModal } from '@/shared/hooks/useModal';
 import { Image } from '@/shared/ui/Image';
 import { ConfirmPopup } from '@/shared/ui/Modal';
+import { getBadgeByInterest } from '@/shared/utils/getBadgeByInterest';
 import clsx from 'clsx';
 import { Edit, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { CSSProperties, useCallback } from 'react';
 import { useDeleteCard } from '../hooks/useDeleteCard';
 import { ICardResponse } from '../model/types';
 import styles from './Card.module.scss';
 
 interface ICardProps {
-	cardData: Pick<ICardResponse, 'title' | 'posterUrl' | 'id'>;
+	cardData: Pick<
+		ICardResponse,
+		'title' | 'posterUrl' | 'id' | 'totalCardRating'
+	>;
 	className?: string;
 }
 
@@ -35,9 +39,11 @@ export function Card({ cardData, className }: ICardProps) {
 		push(`${SITE_ROUTES_BASE.EDIT_CARD}/${cardData.id}`);
 	}, []);
 
-	// const badgeBackgroundColorStyle = {
-	// 	'--badge-bg-c': getBadgeByInterest(cardData.totalCardRating).color,
-	// } as CSSProperties;
+	const badgeConfig = getBadgeByInterest(cardData.totalCardRating);
+	const badgeTier = badgeConfig.tier;
+	const badgeBackgroundColorStyle = {
+		'--badge-bg-c': badgeConfig.color,
+	} as CSSProperties;
 
 	const posterUrl = cardData.posterUrl
 		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.posterUrl}`
@@ -49,7 +55,9 @@ export function Card({ cardData, className }: ICardProps) {
 				href={`${SITE_ROUTES_BASE.CARD}/${cardData.id}`}
 				className={clsx(styles.card, className)}
 			>
-				<div className={styles.badge}></div>
+				<div className={styles.badge} style={badgeBackgroundColorStyle}>
+					<div className={styles.tier}>{badgeTier}</div>
+				</div>
 				<div
 					style={{
 						flexGrow: '1',
