@@ -1,9 +1,14 @@
 .coverWrapper {
 	width: 85px;
+
 	position: relative;
 
 	.cover {
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+		object-position: center center;
 		border-radius: 50%;
+		height: 100%;
 	}
 }
 

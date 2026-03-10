@@ -4,7 +4,9 @@ import { useRouter } from 'next/navigation';
 import { CardFormStateType } from '../model/types';
 import { cardService } from '../service/card.service';
 
-type CardWithPosterFormStateType = CardFormStateType & { file: File };
+type CardWithPosterFormStateType = CardFormStateType & { posterFile: File } & {
+	bannerFile: File | null;
+};
 
 export function useCreateCard() {
 	const queryClient = useQueryClient();
@@ -34,9 +36,16 @@ export function useCreateCard() {
 			});
 
 			const formData = new FormData();
-			formData.append('file', data.file);
+			formData.append('filePoster', data.posterFile);
 
-			await cardService.uploadPoster(createdCard.id, formData);
+			await cardService.uploadPoster(createdCard.id, true, formData);
+
+			//TODO: [WEIRDO] maybe need to find better solution
+			if (data.bannerFile) {
+				const formData = new FormData();
+				formData.append('fileBanner', data.bannerFile);
+				await cardService.uploadPoster(createdCard.id, false, formData);
+			}
 
 			return createdCard;
 		},

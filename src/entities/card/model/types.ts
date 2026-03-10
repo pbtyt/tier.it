@@ -19,6 +19,7 @@ export interface ICardResponse {
 
 	title: string;
 	posterUrl?: string;
+	bannerUrl?: string;
 	status: CardStatusType;
 	type: CardTypeType;
 	episodesNumber: number;

@@ -13,6 +13,7 @@ export function AddNewCard() {
 	const {
 		values,
 		handleChange,
+		handleSetBanner,
 		handleSetPoster,
 		onTypeSelect,
 		onStatusSelect,
@@ -139,13 +140,25 @@ export function AddNewCard() {
 			</section>
 
 			<section className={styles.posterWrapper}>
-				<div className={styles.sectionBlock}>
+				<div
+					className={styles.sectionBlock}
+					style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}
+				>
 					<div className={styles.section}>
 						<div className={styles.header}>
 							<h4>Постер</h4>
 						</div>
 						<UploadPoster
 							setFile={handleSetPoster}
+							className={styles.uploadPoster}
+						/>
+					</div>
+					<div className={styles.section}>
+						<div className={styles.header}>
+							<h4>Баннер</h4>
+						</div>
+						<UploadPoster
+							setFile={handleSetBanner}
 							className={styles.uploadPoster}
 						/>
 					</div>

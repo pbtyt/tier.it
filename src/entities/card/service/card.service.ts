@@ -47,8 +47,8 @@ class CardService {
 		return response;
 	}
 
-	async uploadPoster(id: string, data: FormData) {
-		const posterURL = `/card/${id}/poster`;
+	async uploadPoster(id: string, isPoster: boolean, data: FormData) {
+		const posterURL = `/card/${id}/${isPoster ? 'poster' : 'banner'}`;
 
 		const response = await axiosWithAuth.post<IPosterUploadResponse>(
 			posterURL,

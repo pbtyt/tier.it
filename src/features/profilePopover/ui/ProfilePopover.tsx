@@ -3,7 +3,7 @@ import { ArrowRight, Bell, BookHeart, User } from 'lucide-react';
 import styles from './ProfilePopover.module.scss';
 
 //TODO: Rewrite; Move To Features Layer (ProfileButton Layer)
-export function ProfilePopover() {
+export function ProfilePopover({ name }: { name: string }) {
 	return (
 		<ul className={styles.wrapper}>
 			<li className={clsx(styles.item, styles.active)}>
@@ -23,7 +23,7 @@ export function ProfilePopover() {
 							alignItems: 'start',
 						}}
 					>
-						<span style={{ fontWeight: '600' }}>blad3</span>
+						<span style={{ fontWeight: '600' }}>{name}</span>
 						<span
 							style={{
 								fontSize: '12px',

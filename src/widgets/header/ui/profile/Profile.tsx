@@ -1,22 +1,22 @@
 'use client';
-import { getAccessToken } from '@/entities/auth/services/token.service';
+import { useUserProfile } from '@/entities/user';
 import { Button } from '@/shared/ui/Button';
 import { ProfileImage } from '@/shared/ui/ProfileImage';
-import { useEffect, useState } from 'react';
 
+//TODO: Rewrite
 export function Profile() {
-	const [isUserAuth, setIsUserAuth] = useState<boolean>(false);
-	useEffect(() => {
-		setIsUserAuth(!!getAccessToken());
-	}, []);
+	//TODO: Test only
+	const userData = useUserProfile({
+		fields: 'name,avatarUrl',
+	});
 
-	return !isUserAuth ? (
+	return !userData ? (
 		<Button buttonText='Войти в аккаунт' buttonColor='primary' />
 	) : (
 		// <button ref={ref} onClick={openPopover}>
 		// 	test
 		// </button>
 
-		<ProfileImage coverWidth={44} border />
+		<ProfileImage coverWidth={44} border userData={userData} />
 	);
 }

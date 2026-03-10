@@ -20,6 +20,15 @@
 	--at-ui-text-fs-h3-desktop: 1.5rem;
 	--at-ui-text-fs-standard-desktop: 1.125rem;
 
+	--at-ui-text-fs-2XL-desktop: calc(var(--at-ui-text-fs-standard-desktop) * 2);
+	--at-ui-text-fs-XL-desktop: calc(
+		var(--at-ui-text-fs-standard-desktop) * 1.85
+	);
+	--at-ui-text-fs-L-desktop: calc(var(--at-ui-text-fs-standard-desktop) * 1.5);
+	//TODO: *1.2?
+	--at-ui-text-fs-M-desktop: calc(var(--at-ui-text-fs-standard-desktop) * 1.15);
+	--at-ui-text-fs-S-desktop: calc(var(--at-ui-text-fs-standard-desktop) * 0.75);
+
 	/* Tablet (768px-1439px) */
 	--at-ui-text-fs-h1-tablet: 1.75rem;
 	--at-ui-text-fs-h2-tablet: 1.375rem;

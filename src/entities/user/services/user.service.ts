@@ -1,11 +1,13 @@
 import { axiosWithAuth } from '@/entities/auth';
-import { IUserProfile, type UserFormType } from '../model/types';
+import { type IUserResponse, type UserFormType } from '../model/types';
 
 class UserService {
 	private BASE_URL = '/user/profile';
 
-	async getProfile() {
-		const response = await axiosWithAuth.get<IUserProfile>(this.BASE_URL);
+	async getProfile(fields?: string) {
+		const response = await axiosWithAuth.get<IUserResponse>(
+			`${this.BASE_URL}?fields=${fields}`,
+		);
 		return response.data;
 	}
 

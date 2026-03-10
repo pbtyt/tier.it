@@ -2,7 +2,7 @@
 
 import { Button } from '@/shared/ui/Button';
 import { Field } from '@/shared/ui/Field/ui/Field';
-import { useAuth } from '../hooks/useAuth';
+import { useAuthForm } from '../hooks/useAuthForm';
 import styles from './AuthForm.module.scss';
 
 export function AuthForm() {
@@ -13,7 +13,7 @@ export function AuthForm() {
 		onSubmit,
 		register,
 		setIsLoginForm,
-	} = useAuth();
+	} = useAuthForm();
 
 	return (
 		<div className={styles.wrapper}>

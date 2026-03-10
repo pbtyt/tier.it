@@ -53,7 +53,7 @@
 			justify-content: center;
 
 			.tier {
-				font-size: calc(var(--at-ui-text-fs-standard-desktop) * 1.2);
+				font-size: var(--at-ui-text-fs-M-desktop);
 				font-weight: 500;
 			}
 		}

@@ -11,7 +11,7 @@ export const EPISODE_TAGS: EpisodeTagType[] = [
 	},
 	{
 		value: 4.1,
-		color: '#f3d471',
+		color: '#d3d3d3',
 		title: 'PEAK',
 	},
 ];

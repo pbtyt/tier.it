@@ -1,0 +1,138 @@
+@use '@styles/mixins' as m;
+@use '@styles/helpers' as h;
+
+.wrapper {
+	--card-poster-width: 220px;
+	position: relative;
+
+	padding: 2rem 1.5rem;
+
+	background-position: center center;
+	background-repeat: no-repeat no-repeat;
+	background-size: cover;
+	background-color: black;
+
+	&::before {
+		border-radius: inherit;
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background: h.hex-w-alpha(var(--at-color-black-700), 0.8);
+	}
+
+	border: 2px solid var(--at-color-gray-950);
+	border-radius: 18px;
+
+	// width: 680px;
+	width: 100%;
+	height: auto;
+
+	display: flex;
+	gap: 1rem;
+
+	> * {
+		z-index: 1;
+	}
+
+	.container {
+		flex: 1 0 0;
+
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+
+		.header {
+			font-weight: 600;
+			text-shadow: 5px 3px 3px var(--at-color-black-700);
+
+			font-size: var(--at-ui-text-fs-2XL-desktop);
+		}
+
+		.primaryInfo {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+
+			.title {
+				color: white;
+				text-shadow: 5px 3px 3px var(--at-color-black-700);
+				font-size: var(--at-ui-text-fs-L-desktop);
+				font-weight: 900;
+				text-transform: uppercase;
+
+				@include m.hide-text(3);
+			}
+
+			.totalRating {
+				font-size: var(--at-ui-text-fs-standard-desktop);
+				font-weight: 500;
+			}
+		}
+
+		.border {
+			border: 2px solid white;
+		}
+
+		.addInfoWrapper {
+			display: flex;
+			gap: 2rem;
+
+			.addInfoTitle {
+				margin-bottom: 10px;
+				padding: 4px;
+			}
+
+			.addInfoValue {
+				font-weight: 700;
+			}
+		}
+	}
+
+	.posterContainer {
+		// flex: 0.5 0 0;
+		// margin-left: auto;
+
+		.poster {
+			box-shadow: 8px 8px 8px var(--at-color-black-900);
+
+			// margin-left: auto;
+
+			min-width: var(--card-poster-width);
+
+			img {
+				border-radius: 8px;
+				aspect-ratio: 3 / 4;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+	}
+}
+
+.wrapper.minimal {
+	padding: 1rem;
+
+	.container {
+		gap: 1rem;
+
+		.header {
+			font-size: var(--at-ui-text-fs-L-desktop);
+		}
+	}
+
+	.primaryInfo {
+		.title {
+			font-size: var(--at-ui-text-fs-M-desktop);
+		}
+	}
+	.border {
+		display: none;
+	}
+	// .addInfoWrapper {
+	// 	display: none;
+	// }
+	.posterContainer .poster {
+		min-width: calc(var(--card-poster-width) / 2);
+	}
+}

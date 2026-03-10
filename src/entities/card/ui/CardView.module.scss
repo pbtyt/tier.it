@@ -1,0 +1,142 @@
+@use '@styles/mixins' as m;
+@use '@styles/helpers' as h;
+
+.wrapper {
+	--border: 2px solid var(--at-color-black-600);
+
+	margin-bottom: 0.5rem;
+	display: flex;
+
+	//WEIRDO
+	border: var(--border);
+	& > * {
+		border-right: var(--border);
+		&:last-child {
+			border-right: none;
+		}
+	}
+
+	.primaryInfo {
+		padding: 1rem;
+		flex: 1 0 0;
+
+		display: flex;
+		gap: 1rem;
+
+		.poster {
+			--card-poster-width: 120px;
+
+			min-width: var(--card-poster-width);
+
+			img {
+				border-radius: 8px;
+				aspect-ratio: 3 / 4;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+
+			.title {
+				font-weight: 600;
+				text-align: left;
+				line-height: 1.2;
+				font-size: var(--at-ui-text-fs-standard-desktop);
+
+				@include m.hide-text(1);
+			}
+
+			.description {
+				line-height: 1.2;
+				font-size: calc(var(--at-ui-text-fs-standard-desktop) * 0.85);
+			}
+
+			.description.hidden {
+				@include m.hide-text(4);
+			}
+
+			.metaInfo {
+				margin-top: auto;
+				font-size: var(--at-ui-text-fs-S-desktop);
+				color: var(--at-color-gray-50);
+			}
+		}
+	}
+
+	.statistics {
+		padding: 1rem;
+		flex: 0.5 0 0;
+
+		.title {
+			font-weight: 500;
+			margin-bottom: 1rem;
+			font-size: var(--at-ui-text-fs-standard-desktop);
+		}
+
+		.tagsStat {
+			display: flex;
+			justify-content: space-between;
+
+			.tagWrapper {
+				display: flex;
+				flex-direction: column;
+
+				.tagTitle {
+					font-size: var(--at-ui-text-fs-S-desktop);
+
+					background: #ffbf0f;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					padding: 4px;
+					border-radius: 6px;
+					color: var(--at-color-gray-950);
+					font-weight: 600;
+				}
+
+				.tagValue {
+					font-weight: 600;
+					font-size: var(--at-ui-text-fs-XL-desktop);
+				}
+			}
+		}
+	}
+
+	.episodesInfo {
+		padding: 1rem;
+		flex: 0.5 0 0;
+
+		.title {
+			font-weight: 500;
+			margin-bottom: 1rem;
+			font-size: var(--at-ui-text-fs-standard-desktop);
+		}
+
+		.container {
+			display: flex;
+			gap: 0.75rem;
+			flex-wrap: wrap;
+			.episode {
+				background: h.hex-w-alpha(var(--at-color-black-600), 0.55);
+
+				border: 2px solid var(--at-ui-colors-primary);
+				width: 34.49px;
+				height: 34.49px;
+				border-radius: 50%;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.rating {
+					padding: 4px;
+					font-weight: 500;
+					color: var(--at-ui-colors-text-primary);
+				}
+			}
+		}
+	}
+}

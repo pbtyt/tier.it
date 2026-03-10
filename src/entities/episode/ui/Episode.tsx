@@ -1,3 +1,4 @@
+import { Tag } from '@/shared/ui/Tag/Tag';
 import { getEpisodeTagByRating } from '@/shared/utils/getEpisodeTagByRating';
 import styles from './Episode.module.scss';
 
@@ -26,11 +27,7 @@ export function Episode({ number, title, rating, progress }: IEpisodeProps) {
 						style={{ width: `${progress}%` }}
 					></div>
 				</div>
-				{tag && (
-					<div className={styles.tag} style={{ background: tag.color }}>
-						<div className={styles.tagTitle}>{tag.title}</div>
-					</div>
-				)}
+				{tag && <Tag color={tag.color} title={tag.title} />}
 			</div>
 		</div>
 	);

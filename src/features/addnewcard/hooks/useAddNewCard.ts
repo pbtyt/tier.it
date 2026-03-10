@@ -11,6 +11,7 @@ export function useAddNewCard() {
 		status: 'ONGOING' as CardStatusType,
 		type: 'TV' as CardTypeType,
 		posterFile: null as File | null,
+		bannerFile: null as File | null,
 	});
 
 	const onTypeSelect = (ddId: string, preview: string, data: CardTypeType) => {
@@ -29,6 +30,12 @@ export function useAddNewCard() {
 		fileOrUpdater: File | null | ((prev: File | null) => File | null),
 	) => {
 		setFieldValue('posterFile', fileOrUpdater);
+	};
+
+	const handleSetBanner = (
+		fileOrUpdater: File | null | ((prev: File | null) => File | null),
+	) => {
+		setFieldValue('bannerFile', fileOrUpdater);
 	};
 
 	const handleOnSave = () => {
@@ -57,13 +64,15 @@ export function useAddNewCard() {
 			status: values.status,
 			type: values.type,
 			criteria: [],
-			file: values.posterFile,
+			posterFile: values.posterFile,
+			bannerFile: values.bannerFile,
 		});
 	};
 
 	return {
 		values,
 		handleSetPoster,
+		handleSetBanner,
 		handleChange,
 		onTypeSelect,
 		onStatusSelect,
