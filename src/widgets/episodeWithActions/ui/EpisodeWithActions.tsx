@@ -1,6 +1,6 @@
 import { IEpisodeRatingResponse } from '@/entities/episode';
-import { Episode } from '@/entities/episode/ui/Episode';
 import { EditEpisodeInterest } from '@/features/editEpisodeInterest';
+import { EllipsisVertical } from 'lucide-react';
 import styles from './EpisodeWithActions.module.scss';
 
 interface IEpisodeWithActionsProps {
@@ -22,16 +22,17 @@ export function EpisodeWithActions({
 }: IEpisodeWithActionsProps) {
 	return (
 		<div className={styles.wrapper}>
-			<Episode
-				number={number}
-				title={title}
-				rating={totalEpisodeRating}
-				progress={progress}
-			/>
 			<EditEpisodeInterest
 				episodeId={id}
 				episodeRatingData={episodeRatingData}
+				title={title}
+				number={number}
+				rating={totalEpisodeRating}
+				progress={progress}
 			/>
+			<button className={styles.moreActions}>
+				<EllipsisVertical />
+			</button>
 		</div>
 	);
 }

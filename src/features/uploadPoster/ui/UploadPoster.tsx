@@ -78,12 +78,14 @@ import { UploadPosterModal } from './UploadPosterModal/UploadPosterModal';
 interface IUploadPosterProps {
 	setFile: SetStateType<File | null>;
 	description?: string;
+	previewClassName?: string;
 	className?: string;
 }
 
 export function UploadPoster({
 	setFile,
 	description,
+	previewClassName,
 	className,
 }: IUploadPosterProps) {
 	const [preview, setPreview] = useState<string>('');
@@ -122,7 +124,7 @@ export function UploadPoster({
 	}, [watchFileSelected]);
 
 	return preview ? (
-		<Image src={preview} className={styles.poster} />
+		<Image src={preview} className={clsx(styles.poster, previewClassName)} />
 	) : (
 		<form id='upload-poster' onSubmit={handleSubmit(onSubmit)}>
 			<div

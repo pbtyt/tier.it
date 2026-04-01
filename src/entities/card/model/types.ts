@@ -10,7 +10,12 @@ export type CardType = {
 
 	criteria: CriteriaType[];
 };
-
+interface IGenreResponse {
+	id: number;
+	createdAt: string;
+	updatedAt: string;
+	name: string;
+}
 export interface ICardResponse {
 	id: string;
 
@@ -27,6 +32,7 @@ export interface ICardResponse {
 
 	criteria?: CriteriaType[];
 	episodes?: IEpisodeResponse[];
+	genres?: IGenreResponse[];
 }
 
 export type IPosterUploadResponse = {

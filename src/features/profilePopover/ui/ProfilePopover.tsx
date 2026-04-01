@@ -1,5 +1,7 @@
+import { SITE_ROUTES_BASE } from '@/shared/config/page-url.config';
 import clsx from 'clsx';
 import { ArrowRight, Bell, BookHeart, User } from 'lucide-react';
+import Link from 'next/link';
 import styles from './ProfilePopover.module.scss';
 
 //TODO: Rewrite; Move To Features Layer (ProfileButton Layer)
@@ -7,7 +9,8 @@ export function ProfilePopover({ name }: { name: string }) {
 	return (
 		<ul className={styles.wrapper}>
 			<li className={clsx(styles.item, styles.active)}>
-				<div
+				<Link
+					href={SITE_ROUTES_BASE.CHOOSE}
 					style={{
 						display: 'flex',
 						gap: '.5rem',
@@ -43,7 +46,7 @@ export function ProfilePopover({ name }: { name: string }) {
 							/>
 						</span>
 					</div>
-				</div>
+				</Link>
 			</li>
 			<div
 				style={{

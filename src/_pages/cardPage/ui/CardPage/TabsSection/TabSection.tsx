@@ -1,25 +1,25 @@
 'use client';
 
-import { UpTabs } from '@/shared/ui/Tabs';
+import { Tabs } from '@/shared/ui/Tabs';
 import { CriteriaTab } from '../CriteriaTab/CriteriaTab';
 import { EpisodeTab } from '../EpisodeTab/EpisodeTab';
 import styles from './TabSection.module.scss';
 export function TabSection({ cardId }: { cardId: string }) {
 	return (
-		<UpTabs className={styles.tabWrapper}>
-			<UpTabs.Header>
-				<UpTabs.Tab title='Эпизоды' />
-				<UpTabs.Tab title='Редактирование критериев' />
-				<UpTabs.Tab title='Оценка' />
-			</UpTabs.Header>
+		<Tabs orientation='horizontal' className={styles.tabWrapper}>
+			<Tabs.Header orientation='horizontal'>
+				<Tabs.Tab title='Эпизоды' />
+				<Tabs.Tab title='Редактирование критериев' />
+				<Tabs.Tab title='Оценка' />
+			</Tabs.Header>
 
-			<UpTabs.Content viewIndex={0}>
+			<Tabs.Content viewIndex={0}>
 				<EpisodeTab cardId={cardId} />
-			</UpTabs.Content>
-			<UpTabs.Content viewIndex={1}>
+			</Tabs.Content>
+			<Tabs.Content viewIndex={1}>
 				<CriteriaTab cardId={cardId} />
-			</UpTabs.Content>
-			<UpTabs.Content viewIndex={2}>THIRD</UpTabs.Content>
-		</UpTabs>
+			</Tabs.Content>
+			<Tabs.Content viewIndex={2}>THIRD</Tabs.Content>
+		</Tabs>
 	);
 }

@@ -1,3 +1,4 @@
+'use client';
 import { SITE_ROUTES_BASE } from '@/shared/config/page-url.config';
 import { SITE_NAME } from '@/shared/constants/seo.constants';
 import { House } from 'lucide-react';
@@ -40,7 +41,10 @@ export function Header() {
 					</li>
 				</ul>
 			</nav>
-
+			{/* <Select name={'fruit'} placeholder='Select Fruit'>
+				<Select.Item preview='Apple' value='apple' />
+				<Select.Item preview='Banana' value='banana' />
+			</Select> */}
 			<Profile />
 		</header>
 	);

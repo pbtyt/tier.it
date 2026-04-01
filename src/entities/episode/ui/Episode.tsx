@@ -27,7 +27,14 @@ export function Episode({ number, title, rating, progress }: IEpisodeProps) {
 						style={{ width: `${progress}%` }}
 					></div>
 				</div>
-				{tag && <Tag color={tag.color} title={tag.title} />}
+				{tag && (
+					<Tag
+						color={tag.color}
+						title={tag.title}
+						//TODO: Remove and rewrite without "hardcode" values
+						isCinema={tag.title === 'ABSOLUTE CINEMA'}
+					/>
+				)}
 			</div>
 		</div>
 	);

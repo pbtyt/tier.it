@@ -1,5 +1,7 @@
-import { EpisodeRatingType } from '@/entities/card';
-import { IEpisodeRatingResponse } from '@/entities/episode';
+import type {
+	EpisodeRatingType,
+	IEpisodeRatingResponse,
+} from '@/entities/episode';
 import { useUpdateCardEpisode } from '@/entities/episode/hooks/useUpdateCardEpisode';
 import { useRating } from '@/features/calculateInterest/hooks/useRating';
 import { useModal } from '@/shared/hooks/useModal';
@@ -7,7 +9,7 @@ import { useCallback, useState } from 'react';
 
 export const useEpisodeModal = (
 	episodeRatingData: IEpisodeRatingResponse[] | [],
-	episodeId: string
+	episodeId: string,
 ) => {
 	const criteria = episodeRatingData?.map(e => e.criteria);
 
@@ -20,7 +22,7 @@ export const useEpisodeModal = (
 		episodeRatingData?.map(e => ({
 			rating: e.rating,
 			criteriaId: e.criteriaId,
-		})) ?? []
+		})) ?? [],
 	);
 
 	const { updateCardEpisode } = useUpdateCardEpisode({

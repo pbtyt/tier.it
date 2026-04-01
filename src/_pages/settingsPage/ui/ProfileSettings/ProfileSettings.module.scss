@@ -1,0 +1,52 @@
+@use '@styles/helpers' as h;
+
+.profile {
+	line-height: 110%;
+
+	h3,
+	h4 {
+		margin-bottom: 0.35rem;
+	}
+
+	.info {
+		font-size: var(--at-ui-text-fs-S-desktop);
+		color: var(--at-color-gray-50);
+	}
+
+	.formWrapper {
+		margin-top: 0.75rem;
+		border-radius: 8px;
+		background: h.hex-w-alpha(var(--at-color-gray-700), 0.2);
+		padding: 1rem;
+	}
+
+	.formInputWrapper {
+		margin-top: 0.5rem;
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+
+		.field {
+			width: 450px;
+		}
+	}
+
+	.posterUploadWrapper {
+		margin-top: 0.5rem;
+
+		display: flex;
+		gap: 2rem;
+
+		.poster {
+			min-width: 150px;
+			height: 150px;
+			img {
+				height: 100%;
+				border-radius: 8px;
+				object-position: center center;
+				aspect-ratio: 3 / 4;
+				object-fit: cover;
+			}
+		}
+	}
+}

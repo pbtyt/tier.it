@@ -1,5 +1,5 @@
-import { EpisodeRatingType } from '@/entities/card';
 import { type CriteriaType } from '@/entities/criteria';
+import { type EpisodeRatingType } from '@/entities/episode';
 
 export const calculateInterest = (
 	criteriaRating: EpisodeRatingType[],

@@ -58,7 +58,7 @@
 
 		.altTitle,
 		.meta {
-			font-size: calc(var(--at-ui-text-fs-standard-desktop) * 0.785);
+			font-size: var(--at-ui-text-fs-S-desktop);
 			color: var(--at-color-gray-50);
 		}
 	}

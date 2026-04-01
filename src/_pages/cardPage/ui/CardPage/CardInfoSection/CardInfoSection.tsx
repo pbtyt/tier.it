@@ -2,7 +2,7 @@
 
 import { useCard } from '@/entities/card/hooks/useCard';
 import { Button } from '@/shared/ui/Button';
-import { UpTabs } from '@/shared/ui/Tabs';
+import { Tabs } from '@/shared/ui/Tabs';
 import { Star } from 'lucide-react';
 import { CardPoster } from '../CardPoster/CardPoster';
 import { CriteriaTab } from '../CriteriaTab/CriteriaTab';
@@ -14,7 +14,8 @@ import styles from './CardInfoSection.module.scss';
 export function CardInfoSection({ cardId }: { cardId: string }) {
 	const { card } = useCard({
 		id: cardId,
-		fields: 'posterUrl,title,episodesNumber,type,status,episodes' as const,
+		fields:
+			'posterUrl,title,episodesNumber,type,status,totalCardRating' as const,
 	});
 
 	return (
@@ -26,7 +27,7 @@ export function CardInfoSection({ cardId }: { cardId: string }) {
 					<div className={styles.rating}>
 						<Star className={styles.icon} size={24} />
 						{/* TODO: Add class to span */}
-						<span>9.99</span>
+						<span>{card?.totalCardRating.toFixed(2) || '9.99'}</span>
 					</div>
 					<div className={styles.actions}>
 						<div className={styles.left}>
@@ -41,27 +42,27 @@ export function CardInfoSection({ cardId }: { cardId: string }) {
 				</div>
 			</div>
 
-			<UpTabs className={styles.tabsWrapper}>
-				<UpTabs.Header>
-					<UpTabs.Tab title='О тайтле' />
-					<UpTabs.Tab title='Эпизоды' />
-					<UpTabs.Tab title='Критерии' />
-					<UpTabs.Tab title='Связанное' />
-				</UpTabs.Header>
+			<Tabs orientation='horizontal'>
+				<Tabs.Header orientation='horizontal'>
+					<Tabs.Tab title='О тайтле' />
+					<Tabs.Tab title='Эпизоды' />
+					<Tabs.Tab title='Критерии' />
+					<Tabs.Tab title='Связанное' />
+				</Tabs.Header>
 
-				<UpTabs.Content viewIndex={0}>
+				<Tabs.Content viewIndex={0}>
 					<InfoTab card={card} />
-				</UpTabs.Content>
-				<UpTabs.Content viewIndex={1}>
+				</Tabs.Content>
+				<Tabs.Content viewIndex={1}>
 					<EpisodeTab cardId={cardId} />
-				</UpTabs.Content>
-				<UpTabs.Content viewIndex={2}>
+				</Tabs.Content>
+				<Tabs.Content viewIndex={2}>
 					<CriteriaTab cardId={cardId} />
-				</UpTabs.Content>
-				<UpTabs.Content viewIndex={3}>
+				</Tabs.Content>
+				<Tabs.Content viewIndex={3}>
 					<FranchiseTab />
-				</UpTabs.Content>
-			</UpTabs>
+				</Tabs.Content>
+			</Tabs>
 		</>
 	);
 }

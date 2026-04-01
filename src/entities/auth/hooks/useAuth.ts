@@ -1,6 +1,6 @@
 'use client';
 
-import { userKeys } from '@/entities/user/hooks/useUserProfile';
+import { userKeys } from '@/entities/user/constants/queryKeys';
 import { SITE_ROUTES_BASE } from '@/shared/config/page-url.config';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';

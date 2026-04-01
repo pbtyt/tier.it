@@ -1,0 +1,29 @@
+.wrapper {
+	.coverWrapper {
+		width: 44px;
+		height: 44px;
+
+		position: relative;
+
+		img {
+			aspect-ratio: 3 / 4;
+			object-fit: cover;
+			object-position: center center;
+			border-radius: 50%;
+			height: 100%;
+		}
+	}
+
+	.coverWrapper.border::after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-radius: 50%;
+		border: 2px solid var(--at-ui-colors-primary);
+		margin: -4px;
+	}
+}

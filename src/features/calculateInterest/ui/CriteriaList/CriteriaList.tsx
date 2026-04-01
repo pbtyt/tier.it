@@ -1,7 +1,7 @@
 'use client';
 
-import { EpisodeRatingType } from '@/entities/card';
 import { type CriteriaType } from '@/entities/criteria';
+import { type EpisodeRatingType } from '@/entities/episode';
 import { SetStateType } from '@/shared/utils/utilTypes';
 import { Criteria } from '../Criteria/Criteria';
 import styles from './CriteriaList.module.scss';
@@ -22,8 +22,8 @@ export function CriteriaList({
 	const handleRatingChange = (criteriaId: string, newRating: number) => {
 		setEpisodeRating(prev =>
 			prev.map(item =>
-				item.criteriaId === criteriaId ? { ...item, rating: newRating } : item
-			)
+				item.criteriaId === criteriaId ? { ...item, rating: newRating } : item,
+			),
 		);
 	};
 

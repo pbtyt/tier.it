@@ -1,5 +1,5 @@
-import { EpisodeRatingType } from '@/entities/card';
 import { type CriteriaType } from '@/entities/criteria';
+import { type EpisodeRatingType } from '@/entities/episode';
 import { useMemo } from 'react';
 import { calculateInterest } from '../helpers/calculateInterest';
 /*
@@ -11,11 +11,11 @@ import { calculateInterest } from '../helpers/calculateInterest';
  */
 export const useRating = (
 	criteriaRatings: EpisodeRatingType[],
-	criteria: CriteriaType[]
+	criteria: CriteriaType[],
 ) => {
 	const interest = useMemo(
 		() => calculateInterest(criteriaRatings, criteria),
-		[criteriaRatings]
+		[criteriaRatings],
 	);
 
 	return { interest };

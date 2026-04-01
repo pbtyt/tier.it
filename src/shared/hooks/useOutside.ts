@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import {
+	Dispatch,
+	RefObject,
+	SetStateAction,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 
 type TypeOut = {
 	ref: any;
@@ -8,23 +15,30 @@ type TypeOut = {
 
 export const useOutside = (
 	initialIsVisible: boolean,
-	onClose: () => void = () => {}
+	onClose: () => void = () => {},
+	ignoreRef?: RefObject<HTMLElement | null>,
 ): TypeOut => {
 	const [isShow, setIsShow] = useState<boolean>(initialIsVisible);
 	const ref = useRef<HTMLElement>(null);
 
-	const handleClickOutside = (event: any) => {
-		if (ref.current && !ref.current.contains(event.target)) {
-			setIsShow(false);
+	const handleClickOutside = (event: MouseEvent) => {
+		if (!ref.current) return;
+
+		const target = event.target as Node;
+		const isInside = ref.current.contains(target);
+		const isInsideIgnored = ignoreRef?.current?.contains(target);
+
+		if (!isInside && !isInsideIgnored) {
 			onClose();
+			setIsShow(false);
 		}
 	};
 	//TODO: Support touch for mobile
 	useEffect(() => {
-		document.addEventListener('mousedown', handleClickOutside);
+		document.addEventListener('mouseup', handleClickOutside);
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener('mouseup', handleClickOutside);
 		};
 	});
 

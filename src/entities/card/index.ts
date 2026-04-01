@@ -4,7 +4,6 @@ export type {
 	CardFormStateType,
 	CardStatusType,
 	CardTypeType,
-	EpisodeRatingType,
 	ICardResponse,
 } from './model/types';
 

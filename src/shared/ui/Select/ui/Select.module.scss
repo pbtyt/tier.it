@@ -1,0 +1,52 @@
+@use '@styles/helpers.scss' as h;
+
+.menu {
+	padding: 0.45rem;
+
+	list-style: none;
+
+	border-radius: 5px;
+	border: 2px solid var(--at-color-gray-800);
+
+	background-color: var(--at-color-gray-950);
+	color: inherit;
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+
+	padding: 8px 22px;
+
+	border: 2px solid var(--at-color-gray-800);
+	border-radius: 5px;
+
+	color: inherit;
+	background-color: var(--at-color-gray-950);
+
+	font-size: 16px;
+}
+
+.item {
+	text-align: center;
+
+	padding: 0.35rem 0.5rem;
+
+	border-radius: 5px;
+
+	cursor: pointer;
+
+	transition: all 300ms ease;
+
+	&.active {
+		background-color: rgba(116, 116, 128, 0.1);
+	}
+
+	&:hover {
+		// background-color: rgba(116, 116, 128, 0.1);
+		color: var(--at-ui-colors-primary);
+		background: h.hex-w-alpha(var(--at-ui-colors-primary), 0.35);
+		transition: all 300ms ease;
+	}
+}

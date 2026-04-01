@@ -76,6 +76,10 @@ button:active {
 	transform: scale(0.96);
 }
 
+[role='button'] {
+	cursor: pointer;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;
@@ -84,6 +88,7 @@ a {
 h1,
 h2,
 h3,
+h4,
 p {
 	line-height: 100%;
 }

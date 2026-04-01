@@ -1,1 +1,5 @@
-export type { IEpisodeRatingResponse, IEpisodeResponse } from './model/types';
+export type {
+	EpisodeRatingType,
+	IEpisodeRatingResponse,
+	IEpisodeResponse,
+} from './model/types';

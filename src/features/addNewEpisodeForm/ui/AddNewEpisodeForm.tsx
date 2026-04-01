@@ -32,7 +32,7 @@ export function AddNewEpisodeForm({ cardId }: { cardId: string }) {
 			<Field
 				className={styles.episodeTitleField}
 				id='episode-title'
-				placeholder='Enter Episode Name: '
+				placeholder='Название эпизода: '
 				label=''
 				{...register('title')}
 			/>

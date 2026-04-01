@@ -1,5 +1,9 @@
 import { axiosWithAuth } from '@/entities/auth';
-import { type IUserResponse, type UserFormType } from '../model/types';
+import {
+	type IUserResponse,
+	type IUserStatisticsResponse,
+	type UserFormType,
+} from '../model/types';
 
 class UserService {
 	private BASE_URL = '/user/profile';
@@ -8,6 +12,14 @@ class UserService {
 		const response = await axiosWithAuth.get<IUserResponse>(
 			`${this.BASE_URL}?fields=${fields}`,
 		);
+		return response.data;
+	}
+
+	async getUserStatistics() {
+		const response = await axiosWithAuth.get<IUserStatisticsResponse>(
+			`${this.BASE_URL}/statistics`,
+		);
+
 		return response.data;
 	}
 

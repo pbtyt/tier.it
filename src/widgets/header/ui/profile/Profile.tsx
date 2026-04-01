@@ -1,7 +1,8 @@
 'use client';
 import { useUserProfile } from '@/entities/user';
-import { Button } from '@/shared/ui/Button';
-import { ProfileImage } from '@/shared/ui/ProfileImage';
+import { ProfilePopover } from '@/features/profilePopover';
+import { usePopover } from '@/shared/ui/Popover';
+import { ProfileAvatar } from '@/shared/ui/ProfileAvatar';
 
 //TODO: Rewrite
 export function Profile() {
@@ -10,13 +11,21 @@ export function Profile() {
 		fields: 'name,avatarUrl',
 	});
 
-	return !userData ? (
-		<Button buttonText='Войти в аккаунт' buttonColor='primary' />
-	) : (
-		// <button ref={ref} onClick={openPopover}>
-		// 	test
-		// </button>
+	const {
+		ref: parentRef,
+		openPopover,
+		PopoverMarkup,
+	} = usePopover<HTMLDivElement>(
+		<ProfilePopover name={userData ? userData?.name : 'NO DATA'} />,
+		{ topOffset: 5 },
+	);
 
-		<ProfileImage coverWidth={44} border userData={userData} />
+	return (
+		userData && (
+			<div ref={parentRef} onClick={openPopover}>
+				<ProfileAvatar border avatarUrl={userData.avatarUrl} />
+				{PopoverMarkup}
+			</div>
+		)
 	);
 }
