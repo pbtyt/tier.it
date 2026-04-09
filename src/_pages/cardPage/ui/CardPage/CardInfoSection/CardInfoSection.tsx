@@ -60,7 +60,7 @@ export function CardInfoSection({ cardId }: { cardId: string }) {
 					<CriteriaTab cardId={cardId} />
 				</Tabs.Content>
 				<Tabs.Content viewIndex={3}>
-					<FranchiseTab />
+					<FranchiseTab cardId={cardId} />
 				</Tabs.Content>
 			</Tabs>
 		</>

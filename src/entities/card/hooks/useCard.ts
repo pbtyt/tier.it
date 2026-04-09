@@ -26,4 +26,3 @@ export function useCard<F extends string = ''>({
 
 	return { card };
 }
-1;

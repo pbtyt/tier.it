@@ -71,7 +71,7 @@ button {
 	transition: transform 150ms ease;
 }
 
-button:active {
+button:not(:disabled):active {
 	transition: transform 150ms ease;
 	transform: scale(0.96);
 }

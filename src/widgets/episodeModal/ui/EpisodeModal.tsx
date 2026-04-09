@@ -44,16 +44,16 @@ export function EpisodeModal({
 
 			<div className={styles.controlsWrapper}>
 				<Button
-					buttonText='Сохранить'
-					buttonColor='primary'
-					className={styles.button}
-					onClick={handleOnSaveClick}
-				/>
-				<Button
 					buttonText='Отмена'
 					buttonColor='gray'
 					className={styles.button}
 					onClick={() => hideModal()}
+				/>
+				<Button
+					buttonText='Сохранить'
+					buttonColor='primary'
+					className={styles.button}
+					onClick={handleOnSaveClick}
 				/>
 			</div>
 		</Modal>

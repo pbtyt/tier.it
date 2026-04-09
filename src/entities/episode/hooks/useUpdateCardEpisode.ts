@@ -20,6 +20,11 @@ export function useUpdateCardEpisode({
 				queryKey: ['episodes'],
 			});
 
+			//Update Card Info (Total Rating, etc.)
+			queryClient.invalidateQueries({
+				queryKey: ['card'],
+			});
+
 			onSuccess?.();
 		},
 	});

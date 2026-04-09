@@ -1,12 +1,13 @@
+'use client';
+
+import { useFranchise } from '@/entities/franchise';
 import { Image } from '@/shared/ui/Image';
 import clsx from 'clsx';
 import styles from './FranchiseTab.module.scss';
 
-// NOTE: WIP
-
-//TODO: Change to backend response types
 interface IFranchiseItemProps {
-	number: number;
+	posterUrl?: string;
+	order: number;
 	title: string;
 	altTitle: string;
 	meta: string;
@@ -14,18 +15,19 @@ interface IFranchiseItemProps {
 }
 
 function FranchiseItem({
-	number,
+	posterUrl,
+	order,
 	title,
 	altTitle,
 	meta,
 	isActive = false,
 }: IFranchiseItemProps) {
+	const posterSrc = posterUrl
+		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${posterUrl}`
+		: process.env.NEXT_PUBLIC_PLACEHOLDER;
 	return (
 		<div className={clsx(styles.wrapper, isActive && styles.active)}>
-			<Image
-				src='http://localhost:4200/uploads/images/cmm9kae4i0000utukrsplwfks/63776a5f-9af6-499b-b7be-e607f89cac68.jpg'
-				className={styles.poster}
-			/>
+			<Image src={posterSrc} className={styles.poster} />
 
 			<div className={styles.info}>
 				<span className={styles.title}>{title}</span>
@@ -35,35 +37,40 @@ function FranchiseItem({
 
 			<div className={styles.numberWrapper}>
 				<div className={clsx(styles.number, isActive && styles.active)}>
-					#{number}
+					#{order}
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export function FranchiseTab() {
+export function FranchiseTab({ cardId }: { cardId: string }) {
+	const { franchise } = useFranchise({ cardId });
+
 	return (
 		<section style={{ display: 'flex', flexDirection: 'column' }}>
-			<FranchiseItem
-				number={1}
-				title={'Звездное дитя'}
-				altTitle={'Oshi No Ko'}
-				meta={'2023 • ТВ • 11 эпизодов'}
-			/>
-			<FranchiseItem
-				number={2}
-				title={'Звездное дитя 2'}
-				altTitle={'[Oshi No Ko] 2nd Season'}
-				meta='2024 • ТВ • 13 эпизодов'
-			/>
-			<FranchiseItem
-				number={3}
-				title={'Звездное дитя 3'}
-				altTitle={'[Oshi No Ko] 3rd Season'}
-				meta='2026 • ТВ'
-				isActive
-			/>
+			{franchise ? (
+				franchise.franchiseReleases.map(franchiseRelease => (
+					<FranchiseItem
+						key={franchiseRelease.id}
+						posterUrl={franchiseRelease.release.posterUrl}
+						order={franchiseRelease.order}
+						title={franchiseRelease.release.title}
+						isActive={franchiseRelease.release.id === cardId}
+						altTitle={franchiseRelease.release.title}
+						meta={`2023 • ${franchiseRelease.release.type} • ${franchiseRelease.release.episodesNumber} эпизодов`}
+					/>
+				))
+			) : (
+				<>Нет связанных тайтлов</>
+
+				// <ToggleButton
+				// 	height={35}
+				// 	width={75}
+				// 	IconOn={PanelLeft}
+				// 	IconOff={Grid2X2}
+				// />
+			)}
 		</section>
 	);
 }
