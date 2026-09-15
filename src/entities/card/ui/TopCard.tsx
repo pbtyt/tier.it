@@ -20,10 +20,10 @@ export function TopCard({
 	minimalView = false,
 }: ITopCardProps) {
 	const posterUrl = cardData.posterUrl
-		? `${process.env.VERCEL ? '' : process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.posterUrl}`
+		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.posterUrl}`
 		: process.env.NEXT_PUBLIC_PLACEHOLDER;
 	const bannerUrl = cardData.bannerUrl
-		? `${process.env.VERCEL ? '' : process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.bannerUrl}`
+		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.bannerUrl}`
 		: process.env.NEXT_PUBLIC_PLACEHOLDER;
 
 	return (

@@ -13,7 +13,7 @@ interface ICardProps {
 
 export function CardView({ cardData, className }: ICardProps) {
 	const posterUrl = cardData.posterUrl
-		? `${process.env.VERCEL ? '' : process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.posterUrl}`
+		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.posterUrl}`
 		: process.env.NEXT_PUBLIC_PLACEHOLDER;
 	return (
 		<div className={styles.wrapper}>

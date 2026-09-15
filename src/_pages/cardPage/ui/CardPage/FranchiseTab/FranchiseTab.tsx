@@ -23,7 +23,7 @@ function FranchiseItem({
 	isActive = false,
 }: IFranchiseItemProps) {
 	const posterSrc = posterUrl
-		? `${process.env.VERCEL ? '' : process.env.NEXT_PUBLIC_API_UPLOADS_URL}${posterUrl}`
+		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${posterUrl}`
 		: process.env.NEXT_PUBLIC_PLACEHOLDER;
 	return (
 		<div className={clsx(styles.wrapper, isActive && styles.active)}>

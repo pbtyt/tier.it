@@ -92,7 +92,7 @@ export function ProfileSettings() {
 						previewClassName={styles.poster}
 					/>
 					<Image
-						src={`${process.env.VERCEL ? '' : process.env.NEXT_PUBLIC_API_UPLOADS_URL}${userData?.avatarUrl}`}
+						src={`${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${userData?.avatarUrl}`}
 						className={styles.poster}
 					/>
 				</div>
