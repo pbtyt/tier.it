@@ -25,15 +25,20 @@ export function EditEpisodeInterest({
 	episodeRatingData,
 }: IEditEpisodeInterestProps) {
 	const { showModal } = useModal();
+
 	const handleEpisodeClick = useCallback(() => {
 		showModal(
-			<EpisodeModal id={episodeId} episodeRatingData={episodeRatingData} />,
+			<EpisodeModal
+				title={title}
+				number={number}
+				id={episodeId}
+				episodeRatingData={episodeRatingData}
+			/>,
 		);
 	}, [episodeRatingData]);
 
 	return (
 		<button className={styles.moreButton} onClick={handleEpisodeClick}>
-			{/* <EllipsisVertical /> */}
 			<Episode
 				number={number}
 				title={title}

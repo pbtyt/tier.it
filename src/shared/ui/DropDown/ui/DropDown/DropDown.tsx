@@ -57,7 +57,9 @@ function DropDownContent<T>({
 			onClick={() => setIsShow(true)}
 			ref={ref}
 		>
-			<button className={styles.button}>{preview || initialPreview}</button>
+			<button type='button' className={styles.button}>
+				{preview || initialPreview}
+			</button>
 			<ul
 				style={menuSettings}
 				className={clsx(styles.menu, isShow && styles.opened)}

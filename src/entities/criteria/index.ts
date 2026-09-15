@@ -1,5 +1,7 @@
 export {
 	type CriteriaFormStateType,
+
+	//WARN: DEPRECATED
 	type CriteriaType,
 	type ICriteriaResponse,
 } from './model/types';

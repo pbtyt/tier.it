@@ -1,9 +1,11 @@
 class SITE {
-	private ROOT = '/h';
+	private readonly ROOT = '/h';
 
 	HOME = this.ROOT + '/main';
 	CHOOSE = this.ROOT + '/choose';
 	ADD_NEW_TITLE = this.ROOT + '/add';
+	ADD_NEW_FRANCHISE = this.ROOT + '/add-franchise';
+	FRANCHISE = this.ROOT + '/franchise';
 	CARD = this.ROOT + '/card';
 	EDIT_CARD = this.ROOT + '/card-edit';
 	SETTINGS = this.ROOT + '/settings';

@@ -17,7 +17,7 @@ export function Profile() {
 		PopoverMarkup,
 	} = usePopover<HTMLDivElement>(
 		<ProfilePopover name={userData ? userData?.name : 'NO DATA'} />,
-		{ topOffset: 5 },
+		{ topOffset: 10, attachmentPos: 'right' },
 	);
 
 	return (

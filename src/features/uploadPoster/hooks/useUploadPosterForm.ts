@@ -83,10 +83,22 @@ export function useUploadPosterForm({
 		formState: { errors },
 		watch,
 		reset,
+		trigger,
+		getValues,
 	} = useForm<FormValues>();
+	const watchFileSelected = watch('image')?.[0];
 
-	const handleConfirm = () => {
-		handleSubmit(onSubmit)();
+	const handleConfirm = async () => {
+		const isValid = await trigger('image');
+		if (isValid) {
+			const files = getValues('image');
+			if (files?.[0]) {
+				setFile(files[0]);
+				setPreview(URL.createObjectURL(files[0]));
+				// reset();
+				// hideModal();
+			}
+		}
 	};
 
 	const { ref: formRef, ...rest } = register('image', {
@@ -99,17 +111,6 @@ export function useUploadPosterForm({
 		},
 	});
 
-	const watchFileSelected = watch('image')?.[0];
-
-	const onSubmit = (data: FormValues) => {
-		if (!data.image[0]) return;
-
-		setFile(data.image[0]);
-		setPreview(URL.createObjectURL(data.image[0]));
-		reset();
-		// hideModal();
-	};
-
 	const handleOnPosterSelect = () => {
 		inputRef.current?.click();
 	};
@@ -117,8 +118,6 @@ export function useUploadPosterForm({
 	return {
 		watchFileSelected,
 		reset,
-		handleSubmit,
-		onSubmit,
 		handleOnPosterSelect,
 		rest,
 		formRef,

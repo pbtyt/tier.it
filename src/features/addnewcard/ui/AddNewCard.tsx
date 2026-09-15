@@ -11,28 +11,23 @@ import styles from './AddNewCard.module.scss';
 
 export function AddNewCard() {
 	const {
-		values,
-		handleChange,
 		handleSetBanner,
 		handleSetPoster,
 		onTypeSelect,
 		onStatusSelect,
-		handleOnSave,
+		handleSubmit,
+		onSubmit,
+		register,
 	} = useAddNewCard();
 
 	return (
-		<div className={styles.wrapper}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
 			<section className={clsx(styles.primaryInfoWrapper, styles.sectionBlock)}>
 				<div className={styles.section}>
 					<div className={styles.header}>
 						<h4>Название</h4>
 					</div>
-					<Input
-						name='title'
-						required
-						value={values.title}
-						onChange={handleChange}
-					/>
+					<Input required {...register('title')} />
 				</div>
 
 				<div className={styles.section}>
@@ -165,12 +160,7 @@ export function AddNewCard() {
 				</div>
 			</section>
 
-			<Button
-				buttonColor='primary'
-				buttonText='Save'
-				size='md'
-				onClick={handleOnSave}
-			/>
-		</div>
+			<Button buttonColor='primary' buttonText='Save' size='md' type='submit' />
+		</form>
 	);
 }

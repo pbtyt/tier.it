@@ -11,6 +11,9 @@ export function useDeleteCardEpisode() {
 			queryClient.invalidateQueries({
 				queryKey: ['episodes'],
 			});
+			queryClient.invalidateQueries({
+				queryKey: ['card'],
+			});
 		},
 	});
 

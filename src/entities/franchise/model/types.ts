@@ -30,3 +30,7 @@ export type FranchiseReleaseFormStateType = Partial<
 export type FranchiseFormStateType = Partial<
 	Pick<IFranchiseResponse, 'title' | 'posterUrl' | 'bannerUrl' | 'totalRating'>
 >;
+
+export type FranchiseWithPosterFormStateType = FranchiseFormStateType & {
+	posterFile: File | null;
+};

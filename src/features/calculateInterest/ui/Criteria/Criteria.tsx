@@ -1,18 +1,17 @@
 'use client';
 
-import { type CriteriaType } from '@/entities/criteria';
 import { useCallback, useState } from 'react';
 import { Rating } from '../Rating/Rating';
 import styles from './Criteria.module.scss';
 
 interface ICriteriaProps {
-	data: CriteriaType;
+	title: string;
 	currentRating: number;
 	onRatingChange: (newRating: number) => void;
 }
 
 export function Criteria({
-	data,
+	title,
 	currentRating,
 	onRatingChange,
 }: ICriteriaProps) {
@@ -31,7 +30,7 @@ export function Criteria({
 	return (
 		<div className={styles.criteriaWrapper}>
 			<div className={styles.criteriaInfo}>
-				<span className={styles.criteriaName}>{data.title}</span>
+				<span className={styles.criteriaName}>{title}</span>
 				<span className={styles.criteriaRatingNumber}>
 					{currentRating} из 5
 				</span>

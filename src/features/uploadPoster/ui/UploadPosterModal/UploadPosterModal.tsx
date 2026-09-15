@@ -24,8 +24,8 @@ export function UploadPosterModal({
 		hideModal();
 	};
 
-	const handleOnConfirm = () => {
-		onConfirm?.();
+	const handleOnConfirm = async () => {
+		await onConfirm?.();
 		hideModal();
 	};
 
@@ -44,8 +44,6 @@ export function UploadPosterModal({
 					onClick={handleOnClose}
 				/>
 				<Button
-					type='submit'
-					form='upload-poster'
 					buttonColor='primary'
 					buttonText='Загрузить'
 					onClick={handleOnConfirm}

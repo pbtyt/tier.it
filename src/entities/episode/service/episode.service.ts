@@ -8,9 +8,11 @@ import {
 class EpisodesService {
 	private BASE_ROOT = '/card/episodes';
 
-	async getEpisodes(cardId: string, fields?: string) {
+	async getEpisodes(cardId: string, fields?: string, filter?: string) {
+		//TODO:
+		const encodedFilter = encodeURIComponent(filter || '');
 		const response = await axiosWithAuth.get<IEpisodeResponse[]>(
-			`${this.BASE_ROOT}/${cardId}/all?fields=${fields}`
+			`${this.BASE_ROOT}/${cardId}/all?fields=${fields}&filter=${encodedFilter}`,
 		);
 
 		return response;
@@ -19,7 +21,7 @@ class EpisodesService {
 	async createEpisode(cardId: string, data: EpisodeFormStateType) {
 		const response = await axiosWithAuth.post<IEpisodeResponse>(
 			`${this.BASE_ROOT}/${cardId}`,
-			data
+			data,
 		);
 		return response;
 	}
@@ -27,14 +29,14 @@ class EpisodesService {
 	async updateEpisode(id: string, data: EpisodeUpdateType) {
 		const response = await axiosWithAuth.put<IEpisodeResponse>(
 			`${this.BASE_ROOT}/${id}`,
-			data
+			data,
 		);
 		return response;
 	}
 
 	async deleteEpisode(id: string) {
 		const response = await axiosWithAuth.delete<IEpisodeResponse>(
-			`${this.BASE_ROOT}/${id}`
+			`${this.BASE_ROOT}/${id}`,
 		);
 		return response;
 	}

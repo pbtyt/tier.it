@@ -1,3 +1,4 @@
+//WARN: DEPRECATED
 export type CriteriaType = {
 	id: string;
 	title: string;

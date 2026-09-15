@@ -67,6 +67,20 @@ class FranchiseService {
 
 		return response;
 	}
+
+	async uploadPoster(franchiseId: string, data: FormData) {
+		const posterUrl = `${this.BASE_ROOT}/${franchiseId}/poster`;
+
+		const response = await axiosWithAuth.post<
+			Pick<IFranchiseResponse, 'posterUrl'>
+		>(posterUrl, data, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+
+		return response;
+	}
 }
 
 export const franchiseService = new FranchiseService();

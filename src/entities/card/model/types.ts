@@ -1,8 +1,13 @@
-import { type CriteriaType } from '@/entities/criteria';
+import {
+	CriteriaFormStateType,
+	type CriteriaType,
+	type ICriteriaResponse,
+} from '@/entities/criteria';
 import { type IEpisodeResponse } from '@/entities/episode';
 import { TypeFrom } from '@/shared/utils/utilTypes';
 
 //NOTE: Using only in store
+//WARN: DEPRECATED
 export type CardType = {
 	id: number;
 	title: string;
@@ -30,7 +35,7 @@ export interface ICardResponse {
 	episodesNumber: number;
 	totalCardRating: number;
 
-	criteria?: CriteriaType[];
+	criteria?: ICriteriaResponse[];
 	episodes?: IEpisodeResponse[];
 	genres?: IGenreResponse[];
 }
@@ -54,5 +59,13 @@ export const Status = {
 export type CardStatusType = TypeFrom<typeof Status>;
 
 export type CardFormStateType = Partial<
-	Omit<ICardResponse, 'id' | 'updatedAt' | 'createdAt'>
->;
+	Omit<
+		ICardResponse,
+		'id' | 'updatedAt' | 'createdAt' | 'criteria' | 'episodes' | 'genres'
+	>
+> & { criteria?: CriteriaFormStateType[] };
+
+export type CardWithPosterFormStateType = CardFormStateType & {
+	posterFile: File | null;
+	bannerFile: File | null;
+};

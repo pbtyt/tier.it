@@ -11,7 +11,7 @@ type DropDownContextType<T> = {
 };
 
 const DropDownContext = createContext<DropDownContextType<unknown> | undefined>(
-	undefined
+	undefined,
 );
 
 export const useDropDownContext = <T,>() => {

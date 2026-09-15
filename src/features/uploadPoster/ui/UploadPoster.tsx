@@ -1,7 +1,7 @@
 'use client';
 
 import { Image } from '@/shared/ui/Image';
-import { SetStateType } from '@/shared/utils/utilTypes';
+import { type SetStateType } from '@/shared/utils/utilTypes';
 import clsx from 'clsx';
 import { ImageUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -93,8 +93,6 @@ export function UploadPoster({
 	const {
 		watchFileSelected,
 		reset,
-		handleSubmit,
-		onSubmit,
 		handleOnPosterSelect,
 		rest,
 		formRef,
@@ -126,29 +124,27 @@ export function UploadPoster({
 	return preview ? (
 		<Image src={preview} className={clsx(styles.poster, previewClassName)} />
 	) : (
-		<form id='upload-poster' onSubmit={handleSubmit(onSubmit)}>
-			<div
-				className={clsx(styles.posterLoaderWrapper, className)}
-				onClick={handleOnPosterSelect}
-				role='button'
-			>
-				<input
-					hidden
-					id='image'
-					type='file'
-					accept='image/*'
-					{...rest}
-					ref={e => {
-						formRef(e);
-						inputRef.current = e;
-					}}
-				/>
+		<div
+			className={clsx(styles.posterLoaderWrapper, className)}
+			onClick={handleOnPosterSelect}
+			role='button'
+		>
+			<input
+				hidden
+				id='image'
+				type='file'
+				accept='image/*'
+				{...rest}
+				ref={e => {
+					formRef(e);
+					inputRef.current = e;
+				}}
+			/>
 
-				<ImageUp size={48} strokeWidth={1} />
-				<span>
-					{description ? description : 'Нажмите или перетащите изображение'}
-				</span>
-			</div>
-		</form>
+			<ImageUp size={48} strokeWidth={1} />
+			<span>
+				{description ? description : 'Нажмите или перетащите изображение'}
+			</span>
+		</div>
 	);
 }

@@ -1,13 +1,13 @@
 'use client';
 
-import { type CriteriaType } from '@/entities/criteria';
+import { ICriteriaResponse } from '@/entities/criteria';
 import { type EpisodeRatingType } from '@/entities/episode';
 import { SetStateType } from '@/shared/utils/utilTypes';
 import { Criteria } from '../Criteria/Criteria';
 import styles from './CriteriaList.module.scss';
 
 interface ICriteriaProps {
-	criteria: CriteriaType[] | [];
+	criteria: ICriteriaResponse[] | [];
 	episodeRating: EpisodeRatingType[] | [];
 	setEpisodeRating: SetStateType<EpisodeRatingType[]>;
 	interest: number;
@@ -33,7 +33,7 @@ export function CriteriaList({
 				{criteria.map(c => (
 					<Criteria
 						key={c.id}
-						data={c}
+						title={c.title}
 						currentRating={
 							episodeRating.find(cr => cr.criteriaId === c.id)?.rating || 0
 						}

@@ -1,0 +1,33 @@
+.wrapper {
+	padding: 0.45rem;
+
+	list-style: none;
+	border-radius: 8px;
+	background-color: #303032;
+	color: #bfbfbf;
+
+	// width: 160px;
+}
+.item {
+	padding: 0.35rem 0.5rem;
+	margin-bottom: 0.2rem;
+
+	border-radius: 5px;
+
+	cursor: pointer;
+
+	transition: all 300ms ease;
+
+	width: 100%;
+
+	color: var(--at-ui-colors-text-primary);
+}
+
+.item:last-child {
+	margin-bottom: 0;
+}
+
+.item:hover {
+	background-color: rgba(116, 116, 128, 0.1);
+	transition: all 300ms ease;
+}

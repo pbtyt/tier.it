@@ -90,16 +90,29 @@ type ProcessObj<T, NextTokens extends string> = Prettify<
 			}
 >;
 
-// Обёртка для обработки массивов и опциональных полей (? / undefined / null)
-// Если мы дошли до скалярного поля (например string), то просто возвращаем его тип.
+// // Обёртка для обработки массивов и опциональных полей (? / undefined / null)
+// // Если мы дошли до скалярного поля (например string), то просто возвращаем его тип.
+// type ProcessType<T, NextTokens extends string> =
+// 	NonNullable<T> extends Array<infer U>
+// 		? IsScalar<U> extends true
+// 			? T
+// 			: Array<ProcessObj<U, NextTokens>> | Extract<T, undefined | null>
+// 		: IsScalar<NonNullable<T>> extends true
+// 			? T
+// 			: ProcessObj<NonNullable<T>, NextTokens> | Extract<T, undefined | null>;
+
+// Обёртка для обработки массивов и опциональных полей
 type ProcessType<T, NextTokens extends string> =
-	NonNullable<T> extends Array<infer U>
-		? IsScalar<U> extends true
-			? T
-			: Array<ProcessObj<U, NextTokens>> | Extract<T, undefined | null>
-		: IsScalar<NonNullable<T>> extends true
-			? T
-			: ProcessObj<NonNullable<T>, NextTokens> | Extract<T, undefined | null>;
+	// ЕСЛИ токен 'TRUE', возвращаем тип целиком (со всеми связями)
+	[NextTokens] extends ['TRUE']
+		? T
+		: NonNullable<T> extends Array<infer U>
+			? IsScalar<U> extends true
+				? T
+				: Array<ProcessObj<U, NextTokens>> | Extract<T, undefined | null>
+			: IsScalar<NonNullable<T>> extends true
+				? T
+				: ProcessObj<NonNullable<T>, NextTokens> | Extract<T, undefined | null>;
 
 // Корневой уровень: Prisma `select` всегда работает как Strict Select
 type ProcessRoot<T, Tokens extends string> = Prettify<{
@@ -113,5 +126,9 @@ type ProcessRoot<T, Tokens extends string> = Prettify<{
 // --- 5. ЭКСПОРТНЫЙ ТИП ---
 
 export type PickFields<T, Fields extends string> = Fields extends ''
-	? ProcessObj<T, never> // По умолчанию возвращаем все скаляры
+	? T // По умолчанию возвращаем исходный тип
 	: ProcessRoot<T, SplitAndTrim<Fields, ','>>;
+
+// export type PickFields<T, Fields extends string> = Fields extends ''
+// 	? ProcessObj<T, never> // По умолчанию возвращаем все скаляры
+// 	: ProcessRoot<T, SplitAndTrim<Fields, ','>>;

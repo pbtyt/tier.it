@@ -11,9 +11,13 @@ import styles from './EpisodeModal.module.scss';
 //TODO: RENAME PROPS (AND FOR CHILD COMP.) !!!!!!!!!!!!!!!!!!! IMPORTANT
 export function EpisodeModal({
 	id,
+	number,
+	title,
 	episodeRatingData,
 }: {
 	id: string;
+	number: number;
+	title: string;
 	episodeRatingData?: IEpisodeRatingResponse[];
 }) {
 	const {
@@ -30,6 +34,7 @@ export function EpisodeModal({
 		<Modal className={styles.modalWrapper} modalWidth='400px'>
 			<div className={styles.title}>
 				<span>Оценка</span>
+				<span style={{ fontWeight: '600' }}>Эпизод: {title || number}</span>
 				<button className={styles.closeButton} onClick={handleOnModalClose}>
 					<X size={12} />
 				</button>

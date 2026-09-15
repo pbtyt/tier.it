@@ -1,12 +1,8 @@
 import { SITE_ROUTES_BASE } from '@/shared/config/page-url.config';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { CardFormStateType } from '../model/types';
+import { type CardWithPosterFormStateType } from '../model/types';
 import { cardService } from '../service/card.service';
-
-type CardWithPosterFormStateType = CardFormStateType & { posterFile: File } & {
-	bannerFile: File | null;
-};
 
 export function useCreateCard() {
 	const queryClient = useQueryClient();
@@ -14,49 +10,31 @@ export function useCreateCard() {
 
 	const { mutate: createCard } = useMutation({
 		mutationKey: ['create card'],
-		mutationFn: (data: CardFormStateType) => cardService.createCard(data),
-		onSuccess({ data: createdCard }) {
-			queryClient.invalidateQueries({
-				queryKey: ['cards'],
-			});
-
-			push(`${SITE_ROUTES_BASE.CARD}/${createdCard.id}`);
-		},
-	});
-
-	const { mutate: createCardWithPoster } = useMutation({
-		mutationKey: ['create card with poster'],
 		mutationFn: async (data: CardWithPosterFormStateType) => {
-			const { data: createdCard } = await cardService.createCard({
-				title: data.title,
-				episodesNumber: 0,
-				status: data.status,
-				type: data.type,
-				criteria: data.criteria,
-			});
+			const { bannerFile, posterFile, ...cardData } = data;
+			const { data: createdCard } = await cardService.createCard(cardData);
 
-			const formData = new FormData();
-			formData.append('filePoster', data.posterFile);
+			if (posterFile) {
+				const posterFormData = new FormData();
+				posterFormData.append('filePoster', posterFile);
+				await cardService.uploadPoster(createdCard.id, true, posterFormData);
+			}
 
-			await cardService.uploadPoster(createdCard.id, true, formData);
-
-			//TODO: [WEIRDO] maybe need to find better solution
-			if (data.bannerFile) {
-				const formData = new FormData();
-				formData.append('fileBanner', data.bannerFile);
-				await cardService.uploadPoster(createdCard.id, false, formData);
+			if (bannerFile) {
+				const bannerFormData = new FormData();
+				bannerFormData.append('fileBanner', bannerFile);
+				await cardService.uploadPoster(createdCard.id, false, bannerFormData);
 			}
 
 			return createdCard;
 		},
-		onSuccess(createdCard) {
-			// queryClient.invalidateQueries({
-			// 	queryKey: ['cards'],
-			// });
+		onSuccess: ({ id: cardId }) => {
+			queryClient.invalidateQueries({
+				queryKey: ['cards'],
+			});
 
-			push(`${SITE_ROUTES_BASE.CARD}/${createdCard.id}`);
+			push(`${SITE_ROUTES_BASE.CARD}/${cardId}`);
 		},
 	});
-
-	return { createCard, createCardWithPoster };
+	return { createCard };
 }

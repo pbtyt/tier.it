@@ -1,21 +1,25 @@
 import type { CardStatusType, CardTypeType } from '@/entities/card';
 import { useCreateCard } from '@/entities/card/hooks/useCreateCard';
-import { useForm } from '@/shared/hooks/useForm';
+import { type CardWithPosterFormStateType } from '@/entities/card/model/types';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 export function useAddNewCard() {
-	const { createCard, createCardWithPoster } = useCreateCard();
+	const { createCard } = useCreateCard();
 
-	const { values, handleChange, setFieldValue, reset } = useForm({
-		title: '',
-		desc: '',
-		status: 'ONGOING' as CardStatusType,
-		type: 'TV' as CardTypeType,
-		posterFile: null as File | null,
-		bannerFile: null as File | null,
-	});
+	const { register, handleSubmit, setValue, watch } =
+		useForm<CardWithPosterFormStateType>({
+			defaultValues: {
+				title: '',
+				episodesNumber: 0,
+				status: 'ONGOING',
+				type: 'TV',
+				posterFile: null,
+				bannerFile: null,
+			},
+		});
 
 	const onTypeSelect = (ddId: string, preview: string, data: CardTypeType) => {
-		setFieldValue('type', data);
+		setValue('type', data, { shouldValidate: true });
 	};
 
 	const onStatusSelect = (
@@ -23,59 +27,46 @@ export function useAddNewCard() {
 		preview: string,
 		data: CardStatusType,
 	) => {
-		setFieldValue('status', data);
+		setValue('status', data, { shouldValidate: true });
 	};
 
 	const handleSetPoster = (
 		fileOrUpdater: File | null | ((prev: File | null) => File | null),
 	) => {
-		setFieldValue('posterFile', fileOrUpdater);
+		if (typeof fileOrUpdater === 'function') {
+			setValue('posterFile', fileOrUpdater(watch('posterFile')), {
+				shouldValidate: true,
+			});
+		} else {
+			setValue('posterFile', fileOrUpdater, { shouldValidate: true });
+		}
 	};
 
 	const handleSetBanner = (
 		fileOrUpdater: File | null | ((prev: File | null) => File | null),
 	) => {
-		setFieldValue('bannerFile', fileOrUpdater);
+		if (typeof fileOrUpdater === 'function') {
+			setValue('bannerFile', fileOrUpdater(watch('bannerFile')), {
+				shouldValidate: true,
+			});
+		} else {
+			setValue('bannerFile', fileOrUpdater, { shouldValidate: true });
+		}
 	};
 
-	const handleOnSave = () => {
-		if (!values.title) {
-			alert("Поле 'Название' пустое");
-			return;
-		}
-
-		if (!values.posterFile) {
-			console.log('default CreateCard');
-
-			createCard({
-				title: values.title,
-				episodesNumber: 0,
-				status: values.status,
-				type: values.type,
-				criteria: [],
-			});
-			return;
-		}
-
-		console.log('with poster CreateCard');
-		createCardWithPoster({
-			title: values.title,
-			episodesNumber: 0,
-			status: values.status,
-			type: values.type,
-			criteria: [],
-			posterFile: values.posterFile,
-			bannerFile: values.bannerFile,
-		});
+	const onSubmit: SubmitHandler<CardWithPosterFormStateType> = (
+		data: CardWithPosterFormStateType,
+	) => {
+		createCard(data);
 	};
 
 	return {
-		values,
 		handleSetPoster,
 		handleSetBanner,
-		handleChange,
 		onTypeSelect,
 		onStatusSelect,
-		handleOnSave,
+		handleSubmit,
+		onSubmit,
+		register,
 	};
 }

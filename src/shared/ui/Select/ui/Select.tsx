@@ -36,12 +36,16 @@ function SelectItem({ preview, value }: ISelectItemProps) {
 //TODO: Add Generic For Strict Values Types
 interface ISelectProps {
 	placeholder: string;
+	defaultValue?: string;
+	defaultPreview?: string;
 	name?: string;
 	onSelect?: (value: string) => void;
 	children: ReactElement<ISelectItemProps> | ReactElement<ISelectItemProps>[];
 }
 export function Select({
 	placeholder,
+	defaultValue = '',
+	defaultPreview = '',
 	name,
 	onSelect,
 	children,
@@ -56,8 +60,8 @@ export function Select({
 	);
 
 	const [selected, setSelected] = useState<{ value: string; preview: string }>({
-		value: '',
-		preview: '',
+		value: defaultValue,
+		preview: defaultPreview,
 	});
 
 	const handleSelect = (newValue: string, newPreview: string) => {

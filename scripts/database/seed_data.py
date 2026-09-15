@@ -18,17 +18,21 @@ def make_post(url, data) -> request.Request:
 
 	return request.Request(f"{BASE_API_URL}/{url}", data=json_data, headers=HEADERS, method="POST")
 
+def make_get(url): 
+	return request.Request(f"{BASE_API_URL}/{url}", headers=HEADERS, method="GET")
+
 def main():
 	try:
-		url = "card/episodes/cm9eth5ol0000utkgez0lcxw2"
-		data = {
-			"title": "SSS-tier Hunter"
-		}
+		url = "card"
 		
-		with request.urlopen(make_post(url, data)) as response:
-			response_body = response.read().decode('utf-8')
+		with request.urlopen(make_get(url)) as response:
+			response_body = response.read()
+			encoding = response.info().get_content_charset('utf-8')
+			
 			print("Статус код:", response.status)
-			print("Ответ сервера:", response_body)
+			with open ("./bdata.json", "w", encoding="utf-8") as file:
+				file.write(response_body.decode(encoding))
+			# print("Ответ сервера:", response_body)
 
 	except request_error.HTTPError as e:
 		print(f"Ошибка HTTP: {e.code} {e.reason}")
