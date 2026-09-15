@@ -22,7 +22,13 @@ const uploadOptions: CreateAxiosDefaults = {
 	withCredentials: true,
 };
 
-const axiosClassic = axios.create(options);
+const axiosClassic = axios.create({
+	baseURL: `/api`,
+	headers: {
+		'Content-Type': 'application/json',
+	},
+	withCredentials: true,
+});
 const axiosUpload = axios.create(uploadOptions);
 const axiosWithAuth = axios.create(options);
 
