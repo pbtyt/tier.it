@@ -9,7 +9,7 @@ export const getAccessToken = () => {
 export const saveTokenStorage = (accessToken: string) => {
 	const isProd = process.env.NODE_ENV === 'production';
 	Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
-		domain: isProd ? '.vercel.app' : 'localhost',
+		// domain: isProd ? '.vercel.app' : 'localhost',
 		secure: isProd,
 		sameSite: isProd ? 'lax' : 'strict',
 		expires: 1,
