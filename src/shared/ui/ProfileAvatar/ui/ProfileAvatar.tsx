@@ -17,7 +17,7 @@ export function ProfileAvatar({
 	className,
 }: IProfileAvatar) {
 	const avatarFullUrl = avatarUrl
-		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${avatarUrl}`
+		? `${process.env.VERCEL ? '' : process.env.NEXT_PUBLIC_API_UPLOADS_URL}${avatarUrl}`
 		: process.env.NEXT_PUBLIC_PLACEHOLDER;
 	return (
 		<div className={styles.wrapper}>

@@ -22,7 +22,7 @@ export function CardPoster({
 	if (posterUrl) {
 		return (
 			<Image
-				src={`${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${posterUrl}`}
+				src={`${process.env.VERCEL ? '' : process.env.NEXT_PUBLIC_API_UPLOADS_URL}${posterUrl}`}
 				className={styles.poster}
 			/>
 		);
