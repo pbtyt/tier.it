@@ -26,6 +26,59 @@ const axiosClassic = axios.create(options);
 const axiosUpload = axios.create(uploadOptions);
 const axiosWithAuth = axios.create(options);
 
+let csrfToken: string | null = null;
+
+async function fetchCsrfToken() {
+	if (csrfToken) return csrfToken;
+	const res = await axiosClassic.get('/csrf-token');
+	csrfToken = res.data.csrfToken;
+	return csrfToken;
+}
+
+axiosClassic.interceptors.request.use(async config => {
+	if (
+		['post', 'put', 'patch', 'delete'].includes(
+			config.method?.toLowerCase() || '',
+		)
+	) {
+		const token = await fetchCsrfToken();
+		config.headers['X-CSRF-Token'] = token;
+	}
+	return config;
+});
+
+axiosClassic.interceptors.response.use(
+	res => res,
+	async error => {
+		if (error.response?.status === 403) {
+			csrfToken = null;
+		}
+		return Promise.reject(error);
+	},
+);
+
+axiosWithAuth.interceptors.request.use(async config => {
+	if (
+		['post', 'put', 'patch', 'delete'].includes(
+			config.method?.toLowerCase() || '',
+		)
+	) {
+		const token = await fetchCsrfToken();
+		config.headers['X-CSRF-Token'] = token;
+	}
+	return config;
+});
+
+axiosWithAuth.interceptors.response.use(
+	res => res,
+	async error => {
+		if (error.response?.status === 403) {
+			csrfToken = null;
+		}
+		return Promise.reject(error);
+	},
+);
+
 axiosWithAuth.interceptors.request.use(config => {
 	const accessToken = getAccessToken();
 
@@ -56,7 +109,7 @@ axiosWithAuth.interceptors.response.use(
 		}
 
 		throw error;
-	}
+	},
 );
 
 export { axiosClassic, axiosUpload, axiosWithAuth };
