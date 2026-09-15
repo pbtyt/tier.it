@@ -42,6 +42,28 @@ async function fetchCsrfToken() {
 	return csrfToken;
 }
 
+axiosCsrf.interceptors.request.use(async config => {
+	if (
+		['post', 'put', 'patch', 'delete'].includes(
+			config.method?.toLowerCase() || '',
+		)
+	) {
+		const token = await fetchCsrfToken();
+		config.headers['X-CSRF-Token'] = token;
+	}
+	return config;
+});
+
+axiosCsrf.interceptors.response.use(
+	res => res,
+	async error => {
+		if (error.response?.status === 403) {
+			csrfToken = null;
+		}
+		return Promise.reject(error);
+	},
+);
+
 axiosClassic.interceptors.request.use(async config => {
 	if (
 		['post', 'put', 'patch', 'delete'].includes(
