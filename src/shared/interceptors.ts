@@ -29,6 +29,7 @@ const axiosClassic = axios.create({
 	},
 	withCredentials: true,
 });
+const axiosCsrf = axios.create(options);
 const axiosUpload = axios.create(uploadOptions);
 const axiosWithAuth = axios.create(options);
 
@@ -36,7 +37,7 @@ let csrfToken: string | null = null;
 
 async function fetchCsrfToken() {
 	if (csrfToken) return csrfToken;
-	const res = await axiosClassic.get('/csrf-token');
+	const res = await axiosCsrf.get('/csrf-token');
 	csrfToken = res.data.csrfToken;
 	return csrfToken;
 }
