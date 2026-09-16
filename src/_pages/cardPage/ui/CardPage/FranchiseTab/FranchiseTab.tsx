@@ -24,7 +24,7 @@ function FranchiseItem({
 }: IFranchiseItemProps) {
 	const posterSrc = posterUrl
 		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${posterUrl}`
-		: process.env.NEXT_PUBLIC_PLACEHOLDER;
+		: `${process.env.NEXT_PUBLIC_PLACEHOLDER_URL}/franchise/poster.jpg`;
 	return (
 		<div className={clsx(styles.wrapper, isActive && styles.active)}>
 			<Image src={posterSrc} className={styles.poster} />

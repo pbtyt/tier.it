@@ -18,7 +18,7 @@ export function ProfileAvatar({
 }: IProfileAvatar) {
 	const avatarFullUrl = avatarUrl
 		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${avatarUrl}`
-		: process.env.NEXT_PUBLIC_PLACEHOLDER;
+		: `${process.env.NEXT_PUBLIC_PLACEHOLDER_URL}/user/avatar.jpg`;
 	return (
 		<div className={styles.wrapper}>
 			<Image

@@ -14,7 +14,7 @@ interface ICardProps {
 export function CardView({ cardData, className }: ICardProps) {
 	const posterUrl = cardData.posterUrl
 		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.posterUrl}`
-		: process.env.NEXT_PUBLIC_PLACEHOLDER;
+		: `${process.env.NEXT_PUBLIC_PLACEHOLDER_URL}/card/poster.jpg`;
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.primaryInfo}>

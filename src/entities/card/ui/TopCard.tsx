@@ -21,10 +21,10 @@ export function TopCard({
 }: ITopCardProps) {
 	const posterUrl = cardData.posterUrl
 		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.posterUrl}`
-		: process.env.NEXT_PUBLIC_PLACEHOLDER;
+		: `${process.env.NEXT_PUBLIC_PLACEHOLDER_URL}/card/poster.jpg`;
 	const bannerUrl = cardData.bannerUrl
 		? `${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${cardData.bannerUrl}`
-		: process.env.NEXT_PUBLIC_PLACEHOLDER;
+		: `${process.env.NEXT_PUBLIC_PLACEHOLDER_URL}/card/banner.jpg`;
 
 	return (
 		<div
