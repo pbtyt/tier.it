@@ -38,7 +38,6 @@ export function AuthForm() {
 					<Button
 						className={styles.baseButton}
 						disabled={!isValid}
-						onClick={() => setIsLoginForm(true)}
 						buttonText={isLoginForm ? 'Войти' : 'Зарегистрироваться'}
 					/>
 					<Button
