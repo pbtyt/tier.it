@@ -4,6 +4,7 @@ import { removeFromStorage, saveTokenStorage } from './token.service';
 
 export const authService = {
 	async main(type: 'login' | 'register', data: IAuthForm) {
+		console.log(type);
 		const response = await axiosClassic.post<IAuthResponse>(
 			`/auth/${type}`,
 			data,

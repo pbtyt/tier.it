@@ -22,7 +22,6 @@ export function useAuth() {
 		}) => authService.main(isLoginForm ? 'login' : 'register', data),
 
 		onSuccess() {
-			console.log('login');
 			queryClient.invalidateQueries({ queryKey: userKeys.all });
 			push(SITE_ROUTES_BASE.CHOOSE);
 		},
