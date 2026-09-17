@@ -1,6 +1,7 @@
 'use client';
 
 import { useCriteria } from '@/entities/criteria/hooks/useCriteria';
+import { AddNewCriteriaForm } from '@/features/addNewCriteriaForm';
 import { CriteriaWithActions } from '@/widgets/criteriaWithActions';
 import styles from './CriteriaTab.module.scss';
 
@@ -18,6 +19,7 @@ export function CriteriaTab({ cardId }: { cardId: string }) {
 					key={c.id}
 				/>
 			))}
+			<AddNewCriteriaForm cardId={cardId} />
 		</section>
 	);
 }
