@@ -13,11 +13,17 @@ export function AuthForm() {
 		onSubmit,
 		register,
 		setIsLoginForm,
+		errors,
 	} = useAuthForm();
 
 	return (
 		<div className={styles.wrapper}>
 			<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+				{errors.password && (
+					<p style={{ color: 'red' }}>{errors.password.message}</p>
+				)}
+				{errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+				{errors.root && <p style={{ color: 'red' }}>{errors.root.message}</p>}
 				<Field
 					id='email'
 					label='Почта:'

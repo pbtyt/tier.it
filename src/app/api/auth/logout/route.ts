@@ -12,7 +12,10 @@ export async function POST(request: Request) {
 	const setCookie = backendResponse.headers.get('set-cookie');
 	const isLoggedOut = data === 'true';
 
-	const response = NextResponse.json({ success: isLoggedOut });
+	const response = NextResponse.json(
+		{ success: isLoggedOut },
+		{ status: backendResponse.status },
+	);
 
 	if (setCookie) {
 		response.headers.set('set-cookie', setCookie);

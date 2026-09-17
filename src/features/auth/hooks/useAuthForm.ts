@@ -1,4 +1,4 @@
-import { IAuthForm, useAuth } from '@/entities/auth';
+import { handleAuthError, IAuthForm, useAuth } from '@/entities/auth';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -7,7 +7,8 @@ export function useAuthForm() {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isValid },
+		setError,
+		formState: { isValid, errors },
 	} = useForm<IAuthForm>({
 		mode: 'onChange',
 	});
@@ -15,8 +16,12 @@ export function useAuthForm() {
 
 	const { login } = useAuth();
 
-	const onSubmit: SubmitHandler<IAuthForm> = data => {
-		login({ data, isLoginForm });
+	const onSubmit: SubmitHandler<IAuthForm> = async data => {
+		try {
+			await login({ data, isLoginForm });
+		} catch (error) {
+			handleAuthError<IAuthForm>(error, { setError });
+		}
 	};
 
 	return {
@@ -26,5 +31,6 @@ export function useAuthForm() {
 		isValid,
 		setIsLoginForm,
 		isLoginForm,
+		errors,
 	};
 }

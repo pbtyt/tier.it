@@ -11,7 +11,7 @@ export function useAuth() {
 	const queryClient = useQueryClient();
 	const { push, refresh } = useRouter();
 
-	const { mutate: login } = useMutation({
+	const { mutateAsync: login } = useMutation({
 		mutationKey: ['auth'],
 		mutationFn: ({
 			data,
