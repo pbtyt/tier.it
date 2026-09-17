@@ -9,7 +9,7 @@ import { authService } from '../services/auth.service';
 
 export function useAuth() {
 	const queryClient = useQueryClient();
-	const { push } = useRouter();
+	const { push, refresh } = useRouter();
 
 	const { mutate: login } = useMutation({
 		mutationKey: ['auth'],
@@ -32,6 +32,7 @@ export function useAuth() {
 		mutationFn: () => authService.logout(),
 		onSuccess() {
 			queryClient.removeQueries({ queryKey: userKeys.all });
+			refresh();
 		},
 	});
 
