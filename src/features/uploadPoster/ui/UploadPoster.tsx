@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { ImageUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useUploadPosterForm } from '../hooks/useUploadPosterForm';
+import { type IUpdatePosterParams } from '../model/types';
 import styles from './UploadPoster.module.scss';
 import { UploadPosterModal } from './UploadPosterModal/UploadPosterModal';
 
@@ -80,6 +81,8 @@ interface IUploadPosterProps {
 	description?: string;
 	previewClassName?: string;
 	className?: string;
+
+	updatePosterParams: IUpdatePosterParams | null;
 }
 
 export function UploadPoster({
@@ -87,6 +90,8 @@ export function UploadPoster({
 	description,
 	previewClassName,
 	className,
+
+	updatePosterParams,
 }: IUploadPosterProps) {
 	const [preview, setPreview] = useState<string>('');
 
@@ -99,7 +104,11 @@ export function UploadPoster({
 		inputRef,
 		showModal,
 		handleConfirm,
-	} = useUploadPosterForm({ setFile: setFile, setPreview: setPreview });
+	} = useUploadPosterForm({
+		setFile: setFile,
+		setPreview: setPreview,
+		updatePosterParams: updatePosterParams,
+	});
 
 	useEffect(() => {
 		if (watchFileSelected) {

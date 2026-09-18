@@ -2,6 +2,8 @@ import { useModal } from '@/shared/hooks/useModal';
 import { SetStateType } from '@/shared/utils/utilTypes';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import { type IUpdatePosterParams } from '../model/types';
+import { useUploadPoster } from './useUploadPoster';
 
 type FormValues = {
 	image: FileList;
@@ -69,9 +71,11 @@ type FormValues = {
 export function useUploadPosterForm({
 	setFile,
 	setPreview,
+	updatePosterParams,
 }: {
 	setFile: SetStateType<File | null>;
 	setPreview: SetStateType<string>;
+	updatePosterParams: IUpdatePosterParams | null;
 }) {
 	const { showModal, hideModal } = useModal();
 
@@ -88,6 +92,8 @@ export function useUploadPosterForm({
 	} = useForm<FormValues>();
 	const watchFileSelected = watch('image')?.[0];
 
+	const uploadPoster = useUploadPoster(updatePosterParams);
+
 	const handleConfirm = async () => {
 		const isValid = await trigger('image');
 		if (isValid) {
@@ -95,6 +101,10 @@ export function useUploadPosterForm({
 			if (files?.[0]) {
 				setFile(files[0]);
 				setPreview(URL.createObjectURL(files[0]));
+
+				if (uploadPoster !== null) {
+					uploadPoster.mutate(files[0]);
+				}
 				// reset();
 				// hideModal();
 			}

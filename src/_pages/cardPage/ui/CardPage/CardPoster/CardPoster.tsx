@@ -32,6 +32,7 @@ export function CardPoster({
 			setFile={handleSetPoster}
 			className={styles.noPoster}
 			description='Отсутствует постер! Нажмите чтобы загрузить!'
+			updatePosterParams={{ entityId: cardId, entityType: 'card' }}
 		/>
 		// <UploadPoster
 		// 	entityData={{ entity: 'card', entityId: cardId }}

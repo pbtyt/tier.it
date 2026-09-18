@@ -8,7 +8,7 @@ import { ProfileAvatar } from '@/shared/ui/ProfileAvatar';
 export function Profile() {
 	//TODO: Test only
 	const userData = useUserProfile({
-		fields: 'name,avatarUrl',
+		fields: 'name,avatarUrl,email',
 	});
 
 	const {
@@ -16,7 +16,7 @@ export function Profile() {
 		openPopover,
 		PopoverMarkup,
 	} = usePopover<HTMLDivElement>(
-		<ProfilePopover name={userData ? userData?.name : 'NO DATA'} />,
+		<ProfilePopover name={userData?.name || userData?.email || ''} />,
 		{ topOffset: 10, attachmentPos: 'right' },
 	);
 

@@ -146,6 +146,7 @@ export function AddNewCard() {
 						<UploadPoster
 							setFile={handleSetPoster}
 							className={styles.uploadPoster}
+							updatePosterParams={null}
 						/>
 					</div>
 					<div className={styles.section}>
@@ -155,6 +156,7 @@ export function AddNewCard() {
 						<UploadPoster
 							setFile={handleSetBanner}
 							className={styles.uploadPoster}
+							updatePosterParams={null}
 						/>
 					</div>
 				</div>

@@ -43,6 +43,7 @@ export function AddNewFranchise() {
 							className={styles.posterLoader}
 							previewClassName={styles.posterPreview}
 							setFile={handleSetPoster}
+							updatePosterParams={null}
 						/>
 					</div>
 				</div>

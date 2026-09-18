@@ -90,6 +90,7 @@ export function ProfileSettings() {
 					<UploadPoster
 						setFile={handleSetPoster}
 						previewClassName={styles.poster}
+						updatePosterParams={null}
 					/>
 					<Image
 						src={`${process.env.NEXT_PUBLIC_API_UPLOADS_URL}${userData?.avatarUrl}`}

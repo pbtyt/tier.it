@@ -36,7 +36,13 @@ export function ProfilePopover({ name }: { name: string }) {
 							alignItems: 'start',
 						}}
 					>
-						<span style={{ fontWeight: '600' }}>{name}</span>
+						<span
+							style={{
+								fontWeight: '600',
+							}}
+						>
+							{name}
+						</span>
 						<span
 							style={{
 								fontSize: '12px',
